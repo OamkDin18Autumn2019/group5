@@ -4,7 +4,8 @@
   "description": "Platform for e-sports",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrateup": "knex migrate:up"
   },
   "author": "",
   "license": "ISC",
@@ -13,11 +14,13 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mysql2": "^1.7.0",
     "knex": "^0.20.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "husky": "^3.0.9",
