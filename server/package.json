@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrateup": "knex migrate:up"
+    "migrate-up": "knex migrate:up",
+    "migrate-down": "knex migrate:down"
   },
   "author": "",
   "license": "ISC",
