@@ -65,6 +65,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.6.0",
     "husky": "^3.0.8",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1"
@@ -143,6 +144,9 @@
     ]
   },
   "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-decorators"
+    ],
     "presets": [
       "react-app"
     ]
