@@ -10,6 +10,7 @@ const up = knex => {
       .notNullable()
       .unique();
     table.string('password', 255).notNullable();
+    table.string('fullname', 50);
   });
 };
 
