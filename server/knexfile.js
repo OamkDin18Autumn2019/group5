@@ -1,14 +1,14 @@
 module.exports = {
-    development: {
-      client: 'mysql2',
-      connection: {
-        host: PROCESS_ENV.DATABASE_HOST,
-        user: PROCESS_ENV.DATABASE_USER,
-        password: PROCESS_ENV.DATABASE_PASSWORD,
-        database: PROCESS_ENV.DATABASE_NAME
-      },
-      migrations: {
-        tableName: 'migrations'
-      }
+  development: {
+    client: 'mysql2',
+    connection: {
+      host: process.env.DATABASE_HOST,
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME
+    },
+    migrations: {
+      tableName: 'migrations'
     }
-  };
+  }
+};

@@ -6,7 +6,7 @@ const { getUserById } = require('../../auth/authData');
 const jwtStrategy = new JwtStrategy(
   {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: PROCESS_ENV.PASSPORT_SECRET
+    secretOrKey: process.env.PASSPORT_SECRET
   },
   async (payload, done) => {
     const user = await getUserById(payload.id);
