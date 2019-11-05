@@ -2,19 +2,13 @@ const knex = require('../config/database/knex');
 const bcrypt = require('bcryptjs');
 const httpErrors = require('http-errors');
 
-const getUserFromCredentials = async (username, email, password) => {
-  if (username && email) {
-    throw httpErrors(400, 'Provide only username or email to login.');
-  }
-  let query = knex.from('player');
-  if (username) {
-    query.where({ username });
-  } else if (email) {
-    query.where({ email });
-  }
-
-  query.andWhere({ password }).first();
-  const user = await query;
+const getUserFromCredentials = async (usernameOrEmail, password) => {
+  const user = await knex
+    .from('player')
+    .where({ username: usernameOrEmail })
+    .orWhere({ email: usernameOrEmail })
+    .andWhere({ password })
+    .first();
 
   if (!user) {
     return undefined;
