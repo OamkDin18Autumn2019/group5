@@ -1,7 +1,7 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const httpErrors = require('http-errors');
-const { getUserById } = require('../../auth/authData');
+const { getUserById } = require('../../../auth/authData');
 
 const jwtStrategy = new JwtStrategy(
   {
