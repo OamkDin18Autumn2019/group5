@@ -34,27 +34,12 @@ const getUserById = async id => {
   return user;
 };
 
-const registerUser = async (
-  username,
-  email,
-  password,
-  passwordConfirmation
-) => {
-  if (password < 6) {
-    throw httpErrors(400, 'Password has to be at least 6 characters');
-  }
-  if (password !== passwordConfirmation) {
-    throw httpErrors(400, "Passwords don't match");
-  }
-
-  const usernameTrimmed = username.trim();
-  const emailTrimmed = email.trim();
-
+const registerUser = async (username, email, password) => {
   const saltRounds = 4;
   const hash = await bcrypt.hash(password, saltRounds);
 
   const userRegistered = !!(await knex
-    .insert({ username: usernameTrimmed, email: emailTrimmed, password: hash })
+    .insert({ username, email, password: hash })
     .into('player'));
 
   return userRegistered;

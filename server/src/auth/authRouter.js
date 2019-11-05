@@ -12,16 +12,23 @@ authRouter.post('/register', async (req, res, next) => {
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   if (!isValidEmail) {
-    const invalidEmail = httpErrors(400, `Email is not valid`);
-    return next(forbiddeinvalidEmailnError);
+    return next(httpErrors(400, `Email is not valid`));
   }
+  if (password < 6) {
+    return next(httpErrors(400, 'Password has to be at least 6 characters'));
+  }
+  if (password !== passwordConfirmation) {
+    return next(httpErrors(400, "Passwords don't match"));
+  }
+
+  const usernameTrimmed = username.trim();
+  const emailTrimmed = email.trim();
 
   try {
     const userRegistered = await registerUser(
-      username,
-      email,
-      password,
-      passwordConfirmation
+      usernameTrimmed,
+      emailTrimmed,
+      password
     );
     if (!userRegistered) {
       return next(httpErrors(500));
