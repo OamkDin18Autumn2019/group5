@@ -7,7 +7,6 @@ const getUserFromCredentials = async (usernameOrEmail, password) => {
     .from('player')
     .where({ username: usernameOrEmail })
     .orWhere({ email: usernameOrEmail })
-    .andWhere({ password })
     .first();
 
   if (!user) {
