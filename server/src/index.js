@@ -15,6 +15,8 @@ app.use([
   commonResponse
 ]);
 
+app.use('/api', authRouter);
+
 app.use((err, req, res, next) => {
   if (!err.status) {
     const serverError = httpError(500);
