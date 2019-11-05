@@ -1,12 +1,12 @@
-const knex = require("../config/database/knex");
-const bcrypt = require("bcrypt");
-const httpErrors = require("http-errors");
+const knex = require('../config/database/knex');
+const bcrypt = require('bcryptjs');
+const httpErrors = require('http-errors');
 
 const getUserFromCredentials = async (username, email, password) => {
   if (username && email) {
-    throw httpErrors(400, "Provide only username or email to login.");
+    throw httpErrors(400, 'Provide only username or email to login.');
   }
-  let query = knex.from("players");
+  let query = knex.from('player');
   if (username) {
     query.where({ username });
   } else if (email) {
@@ -26,8 +26,8 @@ const getUserFromCredentials = async (username, email, password) => {
 
 const getUserById = async id => {
   const user = await knex
-    .select("id")
-    .from("players")
+    .select('id')
+    .from('player')
     .where({ id })
     .first();
 
@@ -41,10 +41,10 @@ const registerUser = async (
   passwordConfirmation
 ) => {
   if (password < 6) {
-    return httpErrors(400, "Password has to be at least 6 characters");
+    throw httpErrors(400, 'Password has to be at least 6 characters');
   }
   if (password !== passwordConfirmation) {
-    return httpErrors(400, "Passwords don't match");
+    throw httpErrors(400, "Passwords don't match");
   }
 
   const usernameTrimmed = username.trim();
@@ -55,7 +55,7 @@ const registerUser = async (
 
   const userRegistered = !!(await knex
     .insert({ username: usernameTrimmed, email: emailTrimmed, password: hash })
-    .into("players"));
+    .into('player'));
 
   return userRegistered;
 };
