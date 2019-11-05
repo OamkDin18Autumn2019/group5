@@ -43,7 +43,7 @@ const up = knex => {
         .notNullable()
         .defaultTo(false);
     })
-    .createTable('teamRoster', table => {
+    .createTable('team_roster', table => {
       table.increments('id').primary();
       table
         .integer('playerId')
@@ -61,7 +61,7 @@ const up = knex => {
 };
 
 const down = knex => {
-  return knex.schema.dropTable('teamRoster');
+  return knex.schema.dropTable('team_roster');
   return knex.schema.dropTable('team');
   return knex.schema.dropTable('game');
   return knex.schema.dropTable('player');
