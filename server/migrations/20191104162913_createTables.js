@@ -61,10 +61,11 @@ const up = knex => {
 };
 
 const down = knex => {
-  return knex.schema.dropTable('team_roster');
-  return knex.schema.dropTable('team');
-  return knex.schema.dropTable('game');
-  return knex.schema.dropTable('player');
+  return knex.schema
+    .dropTableIfExists('team_roster')
+    .dropTableIfExists('team')
+    .dropTableIfExists('game')
+    .dropTableIfExists('player');
 };
 
 module.exports = { up, down };
