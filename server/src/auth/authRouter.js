@@ -6,8 +6,15 @@ const { registerUser } = require('../auth/authData');
 
 const authRouter = new Router();
 
-authRouter.post('/v1/auth/register', async (req, res, next) => {
+authRouter.post('/register', async (req, res, next) => {
   const { username, email, password, passwordConfirmation } = req.body;
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!isValidEmail) {
+    const invalidEmail = httpErrors(400, `Email is not valid`);
+    return next(forbiddeinvalidEmailnError);
+  }
 
   try {
     const userRegistered = await registerUser(
@@ -33,7 +40,7 @@ authRouter.post('/v1/auth/register', async (req, res, next) => {
 });
 
 authRouter.post(
-  '/v1/auth/token',
+  '/token',
   passport.authenticate('local', { session: false }),
   (req, res) => {
     const accessToken = jwt.sign(

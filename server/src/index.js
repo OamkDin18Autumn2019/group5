@@ -15,7 +15,7 @@ app.use([
   commonResponse
 ]);
 
-app.use('/api', authRouter);
+app.use('/api/v1/auth', authRouter);
 
 app.use((err, req, res, next) => {
   if (!err.status) {
