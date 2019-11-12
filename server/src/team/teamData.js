@@ -14,18 +14,25 @@ const getTeam = async (name, gameId) => {
 };
 
 const registerTeam = async (name, gameId, captainId) => {
-  const teamRegister = await knex
-    .insert({ name, gameId, captainId })
-    .into('team');
+  const team = await knex.transaction(async trx => {
+    const teamRegister = await trx
+      .insert({ name, gameId, captainId })
+      .into('team');
 
-  if (teamRegister && !!teamRegister.length) {
-    await knex('team_roster').insert({
-      playerId: captainId,
-      teamId: teamRegister[0]
-    });
-  }
+    if (teamRegister && !!teamRegister.length) {
+      await trx('team_roster').insert({
+        playerId: captainId,
+        teamId: teamRegister[0]
+      });
+    }
 
-  return teamRegister;
+    const team = await trx('team')
+      .where('id', teamRegister[0])
+      .first();
+    return team;
+  });
+
+  return team;
 };
 
 module.exports = { getTeam, registerTeam };
