@@ -29,7 +29,7 @@ teamRouter.post('/teams', async (req, res, next) => {
     if (!teamRegister) {
       return next(httpErrors(500));
     }
-    return res.data();
+    return res.status(201).json({ team: teamRegister });
   } catch (e) {
     if (e.code === 'ER_DUP_ENTRY') {
       const forbiddenError = httpErrors(
