@@ -17,7 +17,7 @@ app.use([
 ]);
 
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/', teamRouter);
+app.use('/api/v1/teams', teamRouter);
 
 app.use((err, req, res, next) => {
   if (!err.status) {
