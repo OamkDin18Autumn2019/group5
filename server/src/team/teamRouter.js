@@ -7,7 +7,7 @@ const teamRouter = new Router();
 
 teamRouter.use(passport.authenticate('jwt', { session: false }));
 
-teamRouter.post('/teams', async (req, res, next) => {
+teamRouter.post('/', async (req, res, next) => {
   const { name, gameId } = req.body;
   const captainId = req.user.id;
 
@@ -24,12 +24,12 @@ teamRouter.post('/teams', async (req, res, next) => {
   }
 
   try {
-    const teamRegister = await registerTeam(name, gameId, captainId);
+    const team = await registerTeam(name, gameId, captainId);
 
-    if (!teamRegister) {
+    if (!team) {
       return next(httpErrors(500));
     }
-    return res.status(201).json({ team: teamRegister });
+    return res.status(201).json({ team });
   } catch (e) {
     if (e.code === 'ER_DUP_ENTRY') {
       const forbiddenError = httpErrors(
