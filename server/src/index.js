@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const httpError = require('http-errors');
 const authRouter = require('./auth/authRouter');
+const teamRouter = require('./team/teamRouter');
 const { commonResponse } = require('./config/utils');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use([
 ]);
 
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/teams', teamRouter);
 
 app.use((err, req, res, next) => {
   if (!err.status) {
