@@ -1,10 +1,10 @@
 const knex = require('../config/database/knex');
 
-const getTeamsFromCredentials = async (name, gameId) => {
+const getTeam = async (name, gameId) => {
   const team = await knex
     .from('team')
     .where({ name })
-    .orWhere({ gameId })
+    .andWhere({ gameId })
     .first();
   if (!team) {
     return undefined;
@@ -14,11 +14,18 @@ const getTeamsFromCredentials = async (name, gameId) => {
 };
 
 const registerTeam = async (name, gameId, captainId) => {
-  const teamRegister = !!(await knex
+  const teamRegister = await knex
     .insert({ name, gameId, captainId })
-    .into('team'));
+    .into('team');
 
-  return { teamRegister };
+  if (teamRegister && !!teamRegister.length) {
+    await knex('team_roster').insert({
+      playerId: captainId,
+      teamId: teamRegister[0]
+    });
+  }
+
+  return teamRegister;
 };
 
-module.exports = { getTeamsFromCredentials, registerTeam };
+module.exports = { getTeam, registerTeam };
