@@ -27,7 +27,7 @@ const registerTeam = async (name, gameId, captainId) => {
     }
 
     const team = await trx('team')
-      .where('id', teamRegister[0])
+      .where({ id: teamRegister[0] })
       .first();
     return team;
   });
