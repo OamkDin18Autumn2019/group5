@@ -1,20 +1,32 @@
-import { observable, action, computed } from 'mobx';
+import { decorate, observable, action, computed } from 'mobx';
 
 class AppStore {
   @observable initialized;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+    this.accessToken = null;
     this.initialized = false;
   }
 
-  @action init() {
+  @action.bound init() {
     this.initialized = true;
   }
 
-  @action reset() {
+  @action.bound reset() {
     this.initialized = false;
+    this.accessToken = null;
+    localStorage.removeItem('accessToken');
+  }
+
+  @action.bound setAccessToken(accessToken) {
+    this.accessToken = accessToken;
+    localStorage.setItem('accessToken', accessToken);
   }
 }
+
+decorate(AppStore, {
+  accessToken: observable
+});
 
 export default AppStore;
