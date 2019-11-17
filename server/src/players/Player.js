@@ -1,9 +1,9 @@
-const Player = require('./Player');
+const User = require('../auth/User');
 
-class Captain extends Player {
+class Player extends User {
   constructor({ id, username, email, fullname }) {
     super({ id, username, email, fullname });
   }
 }
 
-module.exports = Captain;
+module.exports = Player;
