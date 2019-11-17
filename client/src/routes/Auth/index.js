@@ -72,14 +72,14 @@ const Auth = props => {
           />
           <input
             className={style.password}
-            type="text"
+            type="password"
             value={password}
             onChange={changePassword}
             placeholder="Password"
           />
           <input
             className={style.password}
-            type="text"
+            type="password"
             value={passwordConfirmation}
             onChange={changePasswordConfirmation}
             placeholder="Retype password"
