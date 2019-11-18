@@ -20,13 +20,11 @@ const passwordCheck = body(
   'Password should be at least 6 characters.'
 ).isLength({ min: 6 });
 
-const passwordConfirmationCheck = body('passwordConfirmation').custom(
-  (passwordConfirmation, { req }) => {
-    if (passwordConfirmation !== req.body.password) {
-      throw new Error('Password confirmation does not match password.');
-    }
-    return true;
-  }
+const passwordConfirmationCheck = body(
+  'passwordConfirmation',
+  'Password confirmation does not match password.'
+).custom(
+  (passwordConfirmation, { req }) => passwordConfirmation === req.body.password
 );
 
 const validate = (req, res, next) => {
