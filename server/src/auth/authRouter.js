@@ -1,61 +1,44 @@
 const { Router } = require('express');
 const passport = require('../config/passport/passport');
-const jwt = require('jsonwebtoken');
 const httpErrors = require('http-errors');
-const { registerUser } = require('../auth/authData');
+const authServices = require('./authServices');
+const authValidations = require('./authValidations');
+const { validate } = require('../config/utils');
 
 const authRouter = new Router();
 
-authRouter.post('/register', async (req, res, next) => {
-  const { username, email, password, passwordConfirmation } = req.body;
-
-  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  if (!isValidEmail) {
-    return next(httpErrors(400, `Email is not valid`));
-  }
-  if (password < 6) {
-    return next(httpErrors(400, 'Password has to be at least 6 characters'));
-  }
-  if (password !== passwordConfirmation) {
-    return next(httpErrors(400, "Passwords don't match"));
-  }
-
-  const usernameTrimmed = username.trim();
-  const emailTrimmed = email.trim();
+const registerUser = async (req, res, next) => {
+  const { knex, userRegistrationData } = req.context;
 
   try {
-    const userRegistered = await registerUser(
-      usernameTrimmed,
-      emailTrimmed,
-      password
+    const userRegistered = await authServices.registerUser(
+      knex,
+      userRegistrationData
     );
-    if (!userRegistered) {
-      return next(httpErrors(500));
-    }
+
     return res.data();
   } catch (e) {
     if (e.code === 'ER_DUP_ENTRY') {
       const forbiddenError = httpErrors(
         403,
-        `User '${username}' already exists`
+        `User '${userRegistrationData.username}' already exists`
       );
       return next(forbiddenError);
     }
     return next(e);
   }
-});
+};
 
+const getAccessToken = (req, res, next) => {
+  const accessToken = authServices.signAccessToken(req.user.id);
+  return res.data(null, { accessToken });
+};
+
+authRouter.post('/register', authValidations.userRegistration, registerUser);
 authRouter.post(
   '/token',
   passport.authenticate('local', { session: false }),
-  (req, res) => {
-    const accessToken = jwt.sign(
-      { id: req.user.id },
-      process.env.PASSPORT_SECRET
-    );
-    res.data(null, { accessToken });
-  }
+  getAccessToken
 );
 
 module.exports = authRouter;
