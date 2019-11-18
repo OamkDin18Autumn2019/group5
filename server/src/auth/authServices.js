@@ -29,7 +29,7 @@ const authenticateFromCredentials = async (
     usernameOrEmail
   );
 
-  const match = userData && bcrypt.compare(password, userData.password);
+  const match = userData && (await bcrypt.compare(password, userData.password));
 
   if (!match) {
     throw new Error('Authentication failed.');
