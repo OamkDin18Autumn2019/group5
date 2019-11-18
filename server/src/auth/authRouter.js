@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const passport = require('../config/passport/passport');
-const jwt = require('jsonwebtoken');
 const httpErrors = require('http-errors');
 const authServices = require('./authServices');
 const authValidations = require('./authValidations');
+const { validate } = require('../config/utils');
 
 const authRouter = new Router();
 
