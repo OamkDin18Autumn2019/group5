@@ -6,7 +6,6 @@ const Auth = props => {
   const { appStore, authStore } = props.rootStore;
 
   const [username, setUsername] = useState('');
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -19,10 +18,6 @@ const Auth = props => {
     setEmail(e.target.value);
   };
 
-  const changeUsernameOrEmail = e => {
-    setUsernameOrEmail(e.target.value);
-  };
-
   const changePassword = e => {
     setPassword(e.target.value);
   };
@@ -32,7 +27,7 @@ const Auth = props => {
   };
 
   const login = async () => {
-    await authStore.fetchToken(usernameOrEmail, password);
+    await authStore.fetchToken(username, password);
     setUsername('');
     setPassword('');
   };
@@ -40,55 +35,84 @@ const Auth = props => {
   const register = async () => {
     await authStore.register(username, email, password, passwordConfirmation);
     setUsername('');
+    setEmail('');
     setPassword('');
+    setPasswordConfirmation('');
   };
 
-  if (appStore.authenticated) {
+  if (appStore.accessToken) {
     return <Redirect to="/" />;
   }
 
-  const action = props.location.pathname === '/login' ? login : register;
+  const action = props.location.pathname === '/register' ? register : login;
   const actionName =
-    props.location.pathname === '/login' ? 'Login' : 'Sign me up';
+    props.location.pathname === '/register' ? 'sign me up' : 'Login';
 
   return (
     <>
-      <div className={style.loginBox}>
-        <div className={style.container}>
-          <h1>Sign up</h1>
-          <input
-            className={style.userInfo}
-            type="text"
-            value={username}
-            onChange={changeUsername}
-            placeholder="Username"
-          />
-          <input
-            className={style.userInfo}
-            type="text"
-            value={email}
-            onChange={changeEmail}
-            placeholder="E-mail"
-          />
-          <input
-            className={style.password}
-            type="password"
-            value={password}
-            onChange={changePassword}
-            placeholder="Password"
-          />
-          <input
-            className={style.password}
-            type="password"
-            value={passwordConfirmation}
-            onChange={changePasswordConfirmation}
-            placeholder="Retype password"
-          />
-          <button className={style.submitBtn} onClick={action}>
-            {actionName}
-          </button>
+      {props.location.pathname === '/register' ? (
+        <div className={style.registerBox}>
+          <div className={style.container}>
+            <h1>Sign up</h1>
+            <input
+              className={style.userInfo}
+              type="text"
+              value={username}
+              onChange={changeUsername}
+              placeholder="Username"
+            />
+            <input
+              className={style.userInfo}
+              type="text"
+              value={email}
+              onChange={changeEmail}
+              placeholder="E-mail"
+            />
+            <input
+              className={style.password}
+              type="password"
+              value={password}
+              onChange={changePassword}
+              placeholder="Password"
+            />
+            <input
+              className={style.password}
+              type="password"
+              value={passwordConfirmation}
+              onChange={changePasswordConfirmation}
+              placeholder="Retype password"
+            />
+            <button className={style.submitBtn} onClick={action}>
+              {actionName}
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={style.loginBox}>
+          <div className={style.container}>
+            <div>
+              <h1>Login</h1>
+              <input
+                className={style.userInfo}
+                type="text"
+                value={username}
+                onChange={changeUsername}
+                placeholder="Username or Email"
+              />
+              <input
+                className={style.password}
+                type="password"
+                value={password}
+                onChange={changePassword}
+                placeholder="Password"
+              />
+              <button className={style.submitBtn} onClick={action}>
+                {actionName}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
