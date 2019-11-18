@@ -57,11 +57,32 @@ const up = knex => {
         .notNullable()
         .references('id')
         .inTable('team');
+    })
+    .createTable('request', table => {
+      table.increments('id').primary();
+      table
+        .integer('playerId')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('player');
+      table
+        .integer('teamId')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('team');
+      table
+        .enu('state', ['pending', 'accepted', 'refused'])
+        .notNullable()
+        .defaultTo('pending');
+      table.enu('origin', ['player', 'team']).notNullable();
     });
 };
 
 const down = knex => {
   return knex.schema
+    .dropTableIfExists('request')
     .dropTableIfExists('team_roster')
     .dropTableIfExists('team')
     .dropTableIfExists('game')
