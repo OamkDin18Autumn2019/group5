@@ -7,6 +7,8 @@ class AppStore {
     this.rootStore = rootStore;
     this.accessToken = null;
     this.initialized = false;
+    this.displayAlert = false;
+    this.errorMessage = '';
   }
 
   @action.bound init() {
@@ -22,6 +24,11 @@ class AppStore {
   @action.bound setAccessToken(accessToken) {
     this.accessToken = accessToken;
     localStorage.setItem('accessToken', accessToken);
+  }
+
+  @action.bound setDisplayAlert(displayAlert) {
+    this.displayAlert = displayAlert;
+    this.errorMessage = errorMessage;
   }
 }
 
