@@ -14,7 +14,7 @@ This is the source code for the Autumn project work conducted in Oulu University
 
 - `$ cd server && npm install`
 
-- `$ npm run migrate-up`
+- `$ npm run migrate-up && npm run seed`
 
 Developed by:
 
