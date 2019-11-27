@@ -2,11 +2,10 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 const Alert = props => {
-  const { appStore, alertStore } = props.rootStore;
+  const { alertStore } = props.rootStore;
   return (
     <div>
-      <h1>Halaaaa you has error bish</h1>
-      <p>{this.errorMessage}</p>
+      <p>{alertStore.message}</p>
     </div>
   );
 };

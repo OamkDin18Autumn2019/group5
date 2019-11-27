@@ -1,5 +1,6 @@
 import AppStore from './AppStore';
 import AuthStore from './AuthStore';
+import AlertStore from './AlertStore';
 
 class RootStore {
   constructor() {
