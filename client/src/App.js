@@ -5,7 +5,7 @@ import Home from './routes/Home';
 import Alert from './components/Alert';
 
 const App = props => {
-  const { appStore } = props.rootStore;
+  const { alertStore, appStore } = props.rootStore;
 
   useEffect(() => {
     if (!appStore.initialized) appStore.init();
@@ -13,7 +13,7 @@ const App = props => {
 
   return (
     <>
-      <Alert rootStore={props.rootStore}></Alert>
+      {alertStore.open && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
