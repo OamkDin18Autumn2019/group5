@@ -12,10 +12,12 @@ const App = props => {
   }, [appStore.initialized]);
 
   return (
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/alert" component={Alert} />
-    </Switch>
+    <>
+      <Alert rootStore={props.rootStore}></Alert>
+      <Switch>
+        <Route exact path="/" component={Home} />
+      </Switch>
+    </>
   );
 };
 
