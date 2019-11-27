@@ -7,28 +7,21 @@ class AppStore {
     this.rootStore = rootStore;
     this.accessToken = null;
     this.initialized = false;
-    this.displayAlert = false;
-    this.errorMessage = '';
   }
 
-  @action.bound init() {
+  @action init() {
     this.initialized = true;
   }
 
-  @action.bound reset() {
+  @action reset() {
     this.initialized = false;
     this.accessToken = null;
     localStorage.removeItem('accessToken');
   }
 
-  @action.bound setAccessToken(accessToken) {
+  @action setAccessToken(accessToken) {
     this.accessToken = accessToken;
     localStorage.setItem('accessToken', accessToken);
-  }
-
-  @action.bound setDisplayAlert(displayAlert) {
-    this.displayAlert = displayAlert;
-    this.errorMessage = errorMessage;
   }
 }
 
