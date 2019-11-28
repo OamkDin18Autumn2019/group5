@@ -30,7 +30,7 @@ const Home = props => {
           <div className={style.navContainer}>
             <Link to="/counter-strike-global-offensive">
               <button>
-                <img src="https://steamuserimages-a.akamaihd.net/ugc/933807557811000159/B8936CF76AEA207839139E32593F7FA0C4AEC4C9/" />
+                <img src="https://www.meme-arsenal.com/memes/d81f1fc73c38e2cfacbd493b5d58509c.jpg" />
                 <span>CS: GO</span>
               </button>
             </Link>
@@ -43,10 +43,10 @@ const Home = props => {
             <Link to="/league-of-legends">
               <button>
                 <img
-                  className={style.leagueLogo}
-                  src="https://i.pinimg.com/originals/6c/a8/a9/6ca8a97ae855a25e8abf4d67f88a8754.png"
+                  // src="https://i.pinimg.com/originals/6c/a8/a9/6ca8a97ae855a25e8abf4d67f88a8754.png"
+                  src="https://lolstatic-a.akamaihd.net/riotbar/prod/1.6.706/images/navigation/icon-game-lol.png"
                 />
-                {/* <span>League of Legends</span> */}
+                <span>League of Legends</span>
               </button>
             </Link>
           </div>
