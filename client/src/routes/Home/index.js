@@ -2,12 +2,11 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import style from './index.module.css';
-import bgImg from '../../TI8.jpg';
 
 const Home = props => {
   const { appStore } = props.rootStore;
   const sectionStyle = {
-    backgroundImage: `url(${bgImg})`
+    backgroundImage: `url(https://iem.imgix.net/season-13/katowice/wp-content/uploads/2018/07/20180303_helena-kristiansson_iem-katowice_04924-1.jpg?auto=format%2Ccompress&w=6720)`
   };
   return (
     <div>
