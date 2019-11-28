@@ -27,14 +27,28 @@ const Home = props => {
             </Link>
             <div></div>
           </div>
-          <div className={style.container}>
-            <div className={style.btnContainer}>
-              <Link to="/tournaments">
-                <button>
-                  <span>Tournaments</span>
-                </button>
-              </Link>
-            </div>
+          <div className={style.navContainer}>
+            <Link to="/counter-strike-global-offensive">
+              <button>
+                <img src="https://steamuserimages-a.akamaihd.net/ugc/933807557811000159/B8936CF76AEA207839139E32593F7FA0C4AEC4C9/" />
+                <span>CS: GO</span>
+              </button>
+            </Link>
+            <Link to="/dota2">
+              <button>
+                <img src="https://huntpng.com/images250/dota-2-logo-png-13.png" />
+                <span>Dota 2</span>
+              </button>
+            </Link>
+            <Link to="/league-of-legends">
+              <button>
+                <img
+                  className={style.leagueLogo}
+                  src="https://i.pinimg.com/originals/6c/a8/a9/6ca8a97ae855a25e8abf4d67f88a8754.png"
+                />
+                {/* <span>League of Legends</span> */}
+              </button>
+            </Link>
           </div>
         </div>
       </div>
