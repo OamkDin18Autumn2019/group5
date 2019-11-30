@@ -1,5 +1,6 @@
 const authQueries = require('../auth/authQueries');
 const invitationsQueries = require('./invitationsQueries');
+const teamQueries = require('../team/teamQueries');
 
 const invitePlayerToTeam = async (knex, { username, teamId }) => {
   const playerData = await authQueries.getUserByUsernameOrEmail(knex, username);
@@ -7,6 +8,17 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
   if (!playerData) {
     const error = new Error('Player could not be found.');
     error.name = 'PlayerNotFound';
+    throw error;
+  }
+
+  const playerIsInTeam = await teamQueries.getTeamRoster(knex, {
+    teamId,
+    playerId: playerData.id
+  });
+
+  if (playerIsInTeam) {
+    const error = new Error(`${username} is already in the team.`);
+    error.name = 'ExistingInvitation';
     throw error;
   }
 
