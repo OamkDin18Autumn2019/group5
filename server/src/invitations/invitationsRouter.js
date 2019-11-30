@@ -21,6 +21,11 @@ invitationsRouter.post('/', [
 
       return res.data(null, { invitation });
     } catch (e) {
+      if (e.name === 'ExistingInvitation' || e.name === 'PlayerNotFound') {
+        const forbiddenError = new httpErrors(403, e.message);
+        next(forbiddenError);
+      }
+
       return next(e);
     }
   }
