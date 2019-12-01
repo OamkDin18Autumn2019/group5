@@ -56,7 +56,7 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
 
 const updateInvitationState = async (knex, { id, playerId, state }) => {
   const updatedInvitationData = await knex.transaction(async trx => {
-    const invitationData = await invitationsQueries.getInvitationById(knex, id);
+    const invitationData = await invitationsQueries.getInvitationById(trx, id);
 
     if (invitationData.playerId !== playerId) {
       const error = new Error('The invitation does not belong to the user.');
@@ -70,18 +70,18 @@ const updateInvitationState = async (knex, { id, playerId, state }) => {
       throw error;
     }
 
-    await invitationsQueries.updateInvitationState(knex, {
+    await invitationsQueries.updateInvitationState(trx, {
       id,
       state
     });
 
     const updatedInvitationData = await invitationsQueries.getInvitationById(
-      knex,
+      trx,
       id
     );
 
     if (updatedInvitationData.state === 'accepted') {
-      await addPlayerToTeam(knex, {
+      await addPlayerToTeam(trx, {
         playerId: updatedInvitationData.playerId,
         teamId: updatedInvitationData.teamId
       });
