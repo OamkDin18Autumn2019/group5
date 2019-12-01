@@ -13,14 +13,7 @@ const registerTeam = async (knex, { name, gameId, captainId }) => {
       throw new Error('Team could not be created.');
     }
 
-    const teamRosterId = await teamQueries.insertTeamRoster(trx, {
-      playerId: captainId,
-      teamId
-    });
-
-    if (!teamRosterId) {
-      throw new Error('Player could not be added to the team.');
-    }
+    await addPlayerToTeam(knex, { playerId: captainId, teamId });
 
     const teamData = await teamQueries.getTeamById(trx, teamId);
 
@@ -36,4 +29,17 @@ const registerTeam = async (knex, { name, gameId, captainId }) => {
   return team;
 };
 
-module.exports = { registerTeam };
+const addPlayerToTeam = async (knex, { playerId, teamId }) => {
+  const teamRosterId = await teamQueries.insertTeamRoster(knex, {
+    playerId,
+    teamId
+  });
+
+  if (!teamRosterId) {
+    throw new Error('Player could not be added to the team.');
+  }
+
+  return teamRosterId;
+};
+
+module.exports = { registerTeam, addPlayerToTeam };
