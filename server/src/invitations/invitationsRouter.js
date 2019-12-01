@@ -31,4 +31,20 @@ invitationsRouter.post('/', [
   }
 ]);
 
+invitationsRouter.put('/:invitationId', async (req, res, next) => {
+  const { knex } = req.context;
+
+  try {
+    const invitation = await invitationsServices.updateInvitationState(knex, {
+      invitationId: req.params.invitationId,
+      playerId: req.user.id,
+      state: req.body.state
+    });
+
+    return res.data(null, { invitation });
+  } catch (e) {
+    return next(e);
+  }
+});
+
 module.exports = invitationsRouter;
