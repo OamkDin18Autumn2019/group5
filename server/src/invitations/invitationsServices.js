@@ -1,6 +1,7 @@
 const authQueries = require('../auth/authQueries');
 const invitationsQueries = require('./invitationsQueries');
 const teamQueries = require('../team/teamQueries');
+const { addPlayerToTeam } = require('../team/teamServices');
 
 const invitePlayerToTeam = async (knex, { username, teamId }) => {
   const playerData = await authQueries.getUserByUsernameOrEmail(knex, username);
@@ -53,4 +54,38 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
   return invitationData;
 };
 
-module.exports = { invitePlayerToTeam };
+const updateInvitationState = async (
+  knex,
+  { invitationId, playerId, state }
+) => {
+  const invitationData = await invitationsQueries.getInvitationById(
+    knex,
+    invitationId
+  );
+
+  if (
+    invitationData.playerId !== playerId ||
+    invitationData.state !== 'pending'
+  ) {
+    throw new Error('Invitation could not be updated.');
+  }
+
+  await invitationsQueries.updateInvitationState(knex, {
+    id: invitationId,
+    state
+  });
+
+  const updatedInvitationData = await invitationsQueries.getInvitationById(
+    knex,
+    invitationId
+  );
+
+  if (updatedInvitationData.state === 'accepted') {
+    await addPlayerToTeam(knex, {
+      playerId: updatedInvitationData.playerId,
+      teamId: updatedInvitationData.teamId
+    });
+  }
+};
+
+module.exports = { invitePlayerToTeam, updateInvitationState };
