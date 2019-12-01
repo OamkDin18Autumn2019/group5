@@ -31,20 +31,22 @@ invitationsRouter.post('/', [
   }
 ]);
 
-invitationsRouter.put('/:invitationId', async (req, res, next) => {
-  const { knex } = req.context;
+invitationsRouter.put('/:invitationId', [
+  invitationsValidations.invitationUpdate,
+  async (req, res, next) => {
+    const { knex, invitationData } = req.context;
 
-  try {
-    const invitation = await invitationsServices.updateInvitationState(knex, {
-      invitationId: req.params.invitationId,
-      playerId: req.user.id,
-      state: req.body.state
-    });
+    try {
+      const invitation = await invitationsServices.updateInvitationState(
+        knex,
+        invitationData
+      );
 
-    return res.data(null, { invitation });
-  } catch (e) {
-    return next(e);
+      return res.data(null, { invitation });
+    } catch (e) {
+      return next(e);
+    }
   }
-});
+]);
 
 module.exports = invitationsRouter;
