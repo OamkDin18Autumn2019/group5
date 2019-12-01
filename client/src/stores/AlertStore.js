@@ -1,8 +1,8 @@
 import { observable, action } from 'mobx';
 
 class AlertStore {
-  @observable open = false;
-  @observable message = '';
+  @observable alertOpen = true;
+  @observable message = 'Test Alert!';
 
   constructor(rootStore) {
     this.rootStore = rootStore;

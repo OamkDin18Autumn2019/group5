@@ -13,7 +13,7 @@ const App = props => {
 
   return (
     <>
-      {alertStore.open && <Alert rootStore={props.rootStore} />}
+      {alertStore.alertOpen && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
