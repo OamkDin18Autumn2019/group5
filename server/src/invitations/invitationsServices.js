@@ -54,14 +54,8 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
   return invitationData;
 };
 
-const updateInvitationState = async (
-  knex,
-  { invitationId, playerId, state }
-) => {
-  const invitationData = await invitationsQueries.getInvitationById(
-    knex,
-    invitationId
-  );
+const updateInvitationState = async (knex, { id, playerId, state }) => {
+  const invitationData = await invitationsQueries.getInvitationById(knex, id);
 
   if (
     invitationData.playerId !== playerId ||
@@ -71,13 +65,13 @@ const updateInvitationState = async (
   }
 
   await invitationsQueries.updateInvitationState(knex, {
-    id: invitationId,
+    id,
     state
   });
 
   const updatedInvitationData = await invitationsQueries.getInvitationById(
     knex,
-    invitationId
+    id
   );
 
   if (updatedInvitationData.state === 'accepted') {
@@ -86,6 +80,8 @@ const updateInvitationState = async (
       teamId: updatedInvitationData.teamId
     });
   }
+
+  return updatedInvitationData;
 };
 
 module.exports = { invitePlayerToTeam, updateInvitationState };
