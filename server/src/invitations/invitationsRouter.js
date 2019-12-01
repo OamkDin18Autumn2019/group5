@@ -44,6 +44,14 @@ invitationsRouter.put('/:invitationId', [
 
       return res.data(null, { invitation });
     } catch (e) {
+      if (
+        e.name === 'ForbiddenInvitation' ||
+        e.name === 'InvitationAlreadyUpdated'
+      ) {
+        const forbiddenError = new httpErrors(403, e.message);
+        next(forbiddenError);
+      }
+
       return next(e);
     }
   }
