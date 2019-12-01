@@ -55,36 +55,40 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
 };
 
 const updateInvitationState = async (knex, { id, playerId, state }) => {
-  const invitationData = await invitationsQueries.getInvitationById(knex, id);
+  const updatedInvitationData = await knex.transaction(async trx => {
+    const invitationData = await invitationsQueries.getInvitationById(knex, id);
 
-  if (invitationData.playerId !== playerId) {
-    const error = new Error('The invitation does not belong to the user.');
-    error.name = 'ForbiddenInvitation';
-    throw error;
-  }
+    if (invitationData.playerId !== playerId) {
+      const error = new Error('The invitation does not belong to the user.');
+      error.name = 'ForbiddenInvitation';
+      throw error;
+    }
 
-  if (invitationData.state !== 'pending') {
-    const error = new Error('The invitation has already been updated.');
-    error.name = 'InvitationAlreadyUpdated';
-    throw error;
-  }
+    if (invitationData.state !== 'pending') {
+      const error = new Error('The invitation has already been updated.');
+      error.name = 'InvitationAlreadyUpdated';
+      throw error;
+    }
 
-  await invitationsQueries.updateInvitationState(knex, {
-    id,
-    state
-  });
-
-  const updatedInvitationData = await invitationsQueries.getInvitationById(
-    knex,
-    id
-  );
-
-  if (updatedInvitationData.state === 'accepted') {
-    await addPlayerToTeam(knex, {
-      playerId: updatedInvitationData.playerId,
-      teamId: updatedInvitationData.teamId
+    await invitationsQueries.updateInvitationState(knex, {
+      id,
+      state
     });
-  }
+
+    const updatedInvitationData = await invitationsQueries.getInvitationById(
+      knex,
+      id
+    );
+
+    if (updatedInvitationData.state === 'accepted') {
+      await addPlayerToTeam(knex, {
+        playerId: updatedInvitationData.playerId,
+        teamId: updatedInvitationData.teamId
+      });
+    }
+
+    return updatedInvitationData;
+  });
 
   return updatedInvitationData;
 };
