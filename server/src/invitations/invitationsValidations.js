@@ -39,7 +39,11 @@ const invitationUpdate = [
     const { state } = req.body;
     const { id } = req.user;
 
-    req.context.invitationData = { id: invitationId, state, playerId: id };
+    req.context.invitationData = {
+      id: Number(invitationId),
+      state,
+      playerId: id
+    };
 
     next();
   }
