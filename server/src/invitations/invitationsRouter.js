@@ -31,4 +31,30 @@ invitationsRouter.post('/', [
   }
 ]);
 
+invitationsRouter.put('/:invitationId', [
+  invitationsValidations.invitationUpdate,
+  async (req, res, next) => {
+    const { knex, invitationData } = req.context;
+
+    try {
+      const invitation = await invitationsServices.updateInvitationState(
+        knex,
+        invitationData
+      );
+
+      return res.data(null, { invitation });
+    } catch (e) {
+      if (
+        e.name === 'ForbiddenInvitation' ||
+        e.name === 'InvitationAlreadyUpdated'
+      ) {
+        const forbiddenError = new httpErrors(403, e.message);
+        next(forbiddenError);
+      }
+
+      return next(e);
+    }
+  }
+]);
+
 module.exports = invitationsRouter;
