@@ -17,10 +17,9 @@ const StyledNavBar = styled.div`
 
 const Title = styled.h1`
   width: 100%;
-  margin: 5px;
-  margin-right: 10px;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  margin-left: 15px;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
   text-align: center;
   display: inline-block !important;
   align-items: center;
@@ -28,13 +27,12 @@ const Title = styled.h1`
 
 export const NavBarLink = styled(Link)`
   text-decoration: none;
-  width: 120px;
+  width: 400px;
   height: 32px;
-  background: none;
+  background: #7de88c;
   border: none;
-  border-radius: 2px;
   color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 650;
   text-transform: uppercase;
   transition: 0.1s ease;
