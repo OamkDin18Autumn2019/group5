@@ -5,8 +5,8 @@ import { NavBarLink } from './NavBar';
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 400px;
+  height: 180px;
   vertical-align: middle;
 `;
 
@@ -15,14 +15,16 @@ const Title = styled.span``;
 const GameButton = ({ link, logo, title }) => {
   const StyledGameButton = styled(NavBarLink)`
     display: block;
-    width: 100%;
-    height: 50px;
+    width: 400px;
+    margin: auto;
+    margin-bottom: 7px;
+    height: auto;
   `;
 
   return (
     <StyledGameButton to={link}>
-      <Logo src={logo} />
       <Title>{title}</Title>
+      <Logo src={logo} />
     </StyledGameButton>
   );
 };
