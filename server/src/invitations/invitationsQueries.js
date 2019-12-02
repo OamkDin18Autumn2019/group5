@@ -3,10 +3,17 @@ const getInvitationById = (knex, id) =>
     .where({ id })
     .first();
 
-const getInvitationByPlayerAndTeam = (knex, { playerId, teamId }) =>
-  knex('request')
-    .where({ playerId, teamId })
-    .first();
+const getInvitationByPlayerAndTeam = (knex, { playerId, teamId, state }) => {
+  const query = knex('request').where({ playerId, teamId });
+
+  if (state) {
+    query.where({ state });
+  }
+
+  query.first();
+
+  return query;
+};
 
 const insertInvitation = (knex, { playerId, teamId, origin }) =>
   knex.insert({ playerId, teamId, origin }).into('request');

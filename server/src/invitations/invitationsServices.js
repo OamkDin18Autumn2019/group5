@@ -25,7 +25,7 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
 
   const existingInvitation = await invitationsQueries.getInvitationByPlayerAndTeam(
     knex,
-    { playerId: playerData.id, teamId }
+    { playerId: playerData.id, teamId, state: 'pending' }
   );
 
   if (existingInvitation) {
