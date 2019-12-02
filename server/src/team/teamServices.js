@@ -13,7 +13,7 @@ const registerTeam = async (knex, { name, gameId, captainId }) => {
       throw new Error('Team could not be created.');
     }
 
-    await addPlayerToTeam(knex, { playerId: captainId, teamId });
+    await addPlayerToTeam(trx, { playerId: captainId, teamId });
 
     const teamData = await teamQueries.getTeamById(trx, teamId);
 
