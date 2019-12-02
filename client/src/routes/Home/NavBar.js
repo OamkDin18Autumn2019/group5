@@ -5,19 +5,18 @@ import styled from 'styled-components';
 
 const StyledNavBar = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
-  display: inline-block;
+  flex-wrap: wrap;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
 `;
 
 const Title = styled.h1`
   width: 100%;
-  margin-left: 15px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
     2px 2px 0 #000;
   text-align: center;
@@ -27,8 +26,8 @@ const Title = styled.h1`
 
 export const NavBarLink = styled(Link)`
   text-decoration: none;
-  width: 400px;
-  height: 32px;
+  width: 190px;
+  height: auto;
   background: #7de88c;
   border: none;
   color: #fff;
@@ -41,6 +40,7 @@ export const NavBarLink = styled(Link)`
     1px 1px 0 #000;
   padding: 0;
   margin: 10px;
+  margin-bottom: 0;
 
   &:hover,
   &:focus {
