@@ -8,13 +8,13 @@ class TeamStore {
   async registerTeam(name, gameId) {
     if ((name, gameId)) {
       try {
-        const res = await fetch('http://localhost:8080/api/vi/teams', {
+        const res = await fetch('http://localhost:8080/api/v1/teams', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name
-          }),
-          gameId
+            name,
+            gameId
+          })
         });
 
         if (res) {
