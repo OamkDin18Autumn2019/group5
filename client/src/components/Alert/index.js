@@ -32,19 +32,13 @@ const Paragraph = styled.p`
 
 const Alert = props => {
   const { alertStore } = props.rootStore;
-  console.log(alertStore);
-
-  const handleClick = () => {
-    alertStore.alertOpen = false;
-    console.log(alertStore);
-  };
 
   return (
     <MainStyle>
       <AlertBox>
         <AlertText>
           <Paragraph>{alertStore.message}</Paragraph>
-          <Button onClick={handleClick}>X</Button>
+          <Button onClick={() => alertStore.toggleOpen()}>X</Button>
         </AlertText>
       </AlertBox>
     </MainStyle>

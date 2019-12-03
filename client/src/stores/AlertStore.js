@@ -1,11 +1,15 @@
 import { observable, action } from 'mobx';
 
 class AlertStore {
-  @observable alertOpen = true;
+  @observable open = true;
   @observable message = 'Test Alert!';
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+  }
+
+  @action toggleOpen() {
+    this.open = !this.open;
   }
 
   @action setMessage(message) {

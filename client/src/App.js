@@ -4,7 +4,7 @@ import { Switch, Route, withRouter } from 'react-router';
 import Home from './routes/Home';
 import Alert from './components/Alert';
 
-const App = props => {
+const App = observer(props => {
   const { alertStore, appStore } = props.rootStore;
 
   useEffect(() => {
@@ -13,12 +13,12 @@ const App = props => {
 
   return (
     <>
-      {alertStore.alertOpen && <Alert rootStore={props.rootStore} />}
+      {alertStore.open && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>
     </>
   );
-};
+});
 
-export default withRouter(inject('rootStore')(observer(App)));
+export default withRouter(inject('rootStore')(App));
