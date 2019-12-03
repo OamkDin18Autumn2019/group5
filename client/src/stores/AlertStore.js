@@ -15,6 +15,11 @@ class AlertStore {
   @action setMessage(message) {
     this.message = message;
   }
+
+  @action initError(message) {
+    this.open = true;
+    this.message = message;
+  }
 }
 
 export default AlertStore;
