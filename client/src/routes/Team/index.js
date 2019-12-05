@@ -7,7 +7,7 @@ const Team = props => {
   const { appStore, teamStore } = props.rootStore;
 
   const [name, setName] = useState('');
-  const [gameId, setGameId] = useState('');
+  const [gameId, setGameId] = useState('1');
 
   const changeName = e => {
     setName(e.target.value);
