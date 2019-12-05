@@ -24,9 +24,6 @@ class TeamStore {
             throw new Error(resolved.error.message);
           }
         }
-        if (res.ok) {
-          //do something if the team regiser works
-        }
       } catch (e) {
         console.error(e);
         //this.rootStore.alertStore
