@@ -2,9 +2,9 @@ const seed = async knex => {
   await knex('game').del();
 
   const games = [
-    'League of Legends',
     'Counter Strike: Global Offensive',
-    'DOTA 2'
+    'DOTA 2',
+    'League of Legends'
   ].map(name => {
     return { name };
   });

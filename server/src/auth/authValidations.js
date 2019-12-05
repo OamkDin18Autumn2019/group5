@@ -1,5 +1,26 @@
-const { body, validationResult } = require('express-validator');
+const { check, body, validationResult } = require('express-validator');
 const httpError = require('http-errors');
+const teamQueries = require('../team/teamQueries');
+
+const teamCaptainCheck = body('teamId', 'User is not captain of team.')
+  .custom(async (teamId, { req }) => {
+    const { user } = req;
+    const { knex } = req.context;
+
+    try {
+      const teamData = await teamQueries.getTeamById(knex, teamId);
+      const userIsCaptain = teamData.captainId === req.user.id;
+
+      if (!userIsCaptain) {
+        throw httpError(401, 'User is not captain of team.');
+      }
+
+      return userIsCaptain;
+    } catch (e) {
+      throw e;
+    }
+  })
+  .bail();
 
 const usernameCheck = body(
   'username',
@@ -49,4 +70,4 @@ const userRegistration = [
   validate
 ];
 
-module.exports = { userRegistration };
+module.exports = { teamCaptainCheck, usernameCheck, userRegistration };
