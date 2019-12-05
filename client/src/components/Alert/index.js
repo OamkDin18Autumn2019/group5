@@ -35,7 +35,7 @@ const Alert = props => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      alertStore.toggleOpen();
+      alertStore.timedClose();
     }, 5000);
     return () => clearTimeout(timer);
   }, []);

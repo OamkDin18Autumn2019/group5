@@ -20,6 +20,10 @@ class AlertStore {
     this.open = true;
     this.message = message;
   }
+
+  @action timedClose() {
+    this.open = false;
+  }
 }
 
 export default AlertStore;
