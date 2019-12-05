@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
@@ -32,6 +32,13 @@ const Paragraph = styled.p`
 
 const Alert = props => {
   const { alertStore } = props.rootStore;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      alertStore.toggleOpen();
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <MainStyle>
