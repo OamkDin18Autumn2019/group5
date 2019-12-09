@@ -110,8 +110,6 @@ const Team = props => {
     setName(e.target.value);
   };
 
-  console.log(name, setName);
-
   const optionId = e => {
     const index = e.target.selectedIndex;
     const optionElement = e.target.childNodes[index];
