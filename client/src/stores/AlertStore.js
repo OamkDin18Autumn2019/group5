@@ -1,8 +1,8 @@
 import { observable, action } from 'mobx';
 
 class AlertStore {
-  @observable isOpen = true;
-  @observable message = 'Test Alert!';
+  @observable isOpen = false;
+  @observable message = '';
   @observable duration = 5000;
   @observable color = '#e8807d';
 
