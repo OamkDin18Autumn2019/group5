@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react';
 // import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import './index.module.css';
+import style from './index.module.css';
 
 const Team = props => {
   const { appStore, teamStore } = props.rootStore;
@@ -130,35 +130,52 @@ const Team = props => {
   const action =
     props.location.pathname === '/register-team' ? registerTeam : getTeam;
   const actionName =
-    props.location.pathname === '/register-team' ? 'Register team' : '';
+    props.location.pathname === '/register-team' ? 'submit' : '';
 
   return (
     <>
       {props.location.pathname === '/register-team' ? (
-        <MainStyle>
-          <Container>
-            <Title>Register a Team</Title>
-            <Input
-              autoFocus={true}
+        <div className={style.registerBox}>
+          <div className={style.container}>
+            <h1>Register a Team</h1>
+            <input
+              className={style.userInfo}
               type="text"
               value={name}
               onChange={changeName}
               placeholder="Team name"
             />
-            <Select onChange={optionId}>
-              <Option label="CS:GO" value={gameId} id="1">
+            <select onChange={optionId}>
+              <option
+                className={style.optionStyle}
+                label="CS:GO"
+                value={gameId}
+                id="1"
+              >
                 CS:GO
-              </Option>
-              <Option lable="Dota 2" value={gameId} id="2">
+              </option>
+              <option
+                className={style.optionStyle}
+                lable="Dota 2"
+                value={gameId}
+                id="2"
+              >
                 Dota 2
-              </Option>
-              <Option lable="League of Legends" value={gameId} id="3">
+              </option>
+              <option
+                className={style.optionStyle}
+                lable="League of Legends"
+                value={gameId}
+                id="3"
+              >
                 League of Legends
-              </Option>
-            </Select>
-            <Button onClick={action}>{actionName}</Button>
-          </Container>
-        </MainStyle>
+              </option>
+            </select>
+            <button className={style.submitBtn} onClick={action}>
+              {actionName}
+            </button>
+          </div>
+        </div>
       ) : (
         ''
       )}
