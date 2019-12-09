@@ -1,6 +1,13 @@
 import { decorate, observable, action, computed } from 'mobx';
 
 class AppStore {
+  theme = {
+    primary: '#20242E',
+    secondary: '#7DE88C',
+    detail: '#FFE796',
+    error: '#E8807D'
+  };
+
   @observable initialized;
 
   constructor(rootStore) {
