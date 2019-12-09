@@ -33,22 +33,6 @@ const Title = styled.h1`
 `;
 
 const Team = props => {
-  const { appStore, teamStore } = props.rootStore;
-
-  const [name, setName] = useState('');
-  const [gameId, setGameId] = useState('1');
-
-  const changeName = e => {
-    setName(e.target.value);
-  };
-
-  const optionId = e => {
-    const index = e.target.selectedIndex;
-    const optionElement = e.target.childNodes[index];
-    const option = optionElement.getAttribute('id');
-    setGameId(option);
-  };
-
   return (
     <>
       {props.location.pathname === '/register-team' ? (
