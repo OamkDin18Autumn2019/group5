@@ -4,10 +4,11 @@ class AlertStore {
   @observable isOpen = false;
   @observable message = '';
   @observable duration = 5000;
-  @observable color = '#e8807d';
+  @observable color = '';
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+    this.color = rootStore.appStore.theme.secondary;
   }
 
   @action setMessage(message) {
@@ -22,7 +23,14 @@ class AlertStore {
     this.color = color;
   }
 
+  @action initMessage(message) {
+    this.color = this.rootStore.appStore.theme.secondary;
+    this.message = message;
+    this.open();
+  }
+
   @action initError(message) {
+    this.color = this.rootStore.appStore.theme.error;
     this.message = message;
     this.open();
   }
