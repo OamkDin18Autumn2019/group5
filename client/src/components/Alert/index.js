@@ -8,7 +8,7 @@ const MainStyle = styled.div`
 `;
 
 const AlertBox = styled.section`
-  background-color: ${props.color};
+  background-color: ${({ color }) => color};
   padding: 4em;
 `;
 
