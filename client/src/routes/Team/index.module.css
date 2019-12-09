@@ -17,7 +17,7 @@ select {
   font-weight: 300;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #636363;
+  color: #20242e;
   width: 220px;
 }
 
@@ -26,7 +26,7 @@ select {
   margin: 15% auto;
   display: flex;
   width: 300px;
-  height: 400px;
+  height: 350px;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 10px rgb(0, 0, 0);
@@ -57,7 +57,7 @@ h1 {
   margin: 10px 0 20px 0;
   font-weight: 300;
   font-size: 28px;
-  color: #636363;
+  color: #20242e;
 }
 
 .userInfo,
@@ -72,30 +72,44 @@ h1 {
   border-bottom: 1px solid #aaa;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   transition: 0.2s ease;
 }
 
 .userInfo:focus,
 .password:focus {
-  border-bottom: 2px solid #636363;
-  color: #636363;
+  border-bottom: 2px solid #20242e;
+  color: #20242e;
   transition: 0.2s ease;
 }
 
-.submitBtn {
-  margin-top: 28px;
-  width: 120px;
-  height: 32px;
-  background: #636363;
-  border: none;
-  border-radius: 2px;
-  color: #fff;
+.optionStyle {
+  font-weight: 300;
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-size: 16px;
+  color: #20242e;
+  width: 220px;
+}
+
+.submitBtn {
+  text-decoration: none;
+  width: 220px;
+  height: 40px;
+  font-size: 16px;
+  background: #7de88c;
+  border: none;
+  color: #fff;
+  font-family: Roboto, sans-serif;
+  font-weight: 650;
   text-transform: uppercase;
   transition: 0.1s ease;
   cursor: pointer;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .submitBtn:hover,
