@@ -8,7 +8,7 @@ const MainStyle = styled.div`
 `;
 
 const AlertBox = styled.section`
-  background-color: #e8807d;
+  background-color: ${props.color};
   padding: 4em;
 `;
 
@@ -18,7 +18,7 @@ const AlertText = styled.div`
   font-size: 150%;
 `;
 
-const Button = styled.button`
+const CloseButton = styled.button`
   font-size: 1em;
   margin: 0.5em;
   padding: 0.05em 0.75em;
@@ -26,7 +26,7 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const Paragraph = styled.p`
+const Message = styled.p`
   display: inline;
 `;
 
@@ -35,17 +35,17 @@ const Alert = props => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      alertStore.timedClose();
-    }, 5000);
+      alertStore.close();
+    }, alertStore.duration);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <MainStyle>
-      <AlertBox>
+      <AlertBox color={alertStore.color}>
         <AlertText>
-          <Paragraph>{alertStore.message}</Paragraph>
-          <Button onClick={() => alertStore.toggleOpen()}>X</Button>
+          <Message>{alertStore.message}</Message>
+          <CloseButton onClick={() => alertStore.close()}>X</CloseButton>
         </AlertText>
       </AlertBox>
     </MainStyle>

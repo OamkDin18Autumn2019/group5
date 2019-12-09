@@ -13,7 +13,7 @@ const App = observer(props => {
 
   return (
     <>
-      {alertStore.open && <Alert rootStore={props.rootStore} />}
+      {alertStore.isOpen && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>

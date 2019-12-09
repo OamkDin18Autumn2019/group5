@@ -1,28 +1,38 @@
 import { observable, action } from 'mobx';
 
 class AlertStore {
-  @observable open = true;
+  @observable isOpen = true;
   @observable message = 'Test Alert!';
+  @observable duration = 5000;
+  @observable color = '#e8807d';
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-  }
-
-  @action toggleOpen() {
-    this.open = !this.open;
   }
 
   @action setMessage(message) {
     this.message = message;
   }
 
-  @action initError(message) {
-    this.open = true;
-    this.message = message;
+  @action setDuration(duration) {
+    this.duration = duration;
   }
 
-  @action timedClose() {
-    this.open = false;
+  @action setColor(color) {
+    this.color = color;
+  }
+
+  @action initError(message) {
+    this.message = message;
+    this.open();
+  }
+
+  @action open() {
+    this.isOpen = true;
+  }
+
+  @action close() {
+    this.isOpen = false;
   }
 }
 
