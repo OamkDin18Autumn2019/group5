@@ -5,6 +5,7 @@ const httpError = require('http-errors');
 const knex = require('./config/database/knex');
 const authRouter = require('./auth/authRouter');
 const teamRouter = require('./team/teamRouter');
+const invitationsRouter = require('./invitations/invitationsRouter');
 const { commonResponse, context } = require('./config/utils');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use([
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/teams', teamRouter);
+app.use('/api/v1/invitations', invitationsRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);
