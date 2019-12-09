@@ -110,6 +110,8 @@ const Team = props => {
     setName(e.target.value);
   };
 
+  console.log(name, setName);
+
   const optionId = e => {
     const index = e.target.selectedIndex;
     const optionElement = e.target.childNodes[index];
@@ -139,6 +141,7 @@ const Team = props => {
           <Container>
             <Title>Register a Team</Title>
             <Input
+              autoFocus={true}
               type="text"
               value={name}
               onChange={changeName}
