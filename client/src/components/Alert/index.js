@@ -2,25 +2,27 @@ import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 
-const MainStyle = styled.div`
-  width: 30%;
+const StyledAlert = styled.div`
+  position: absolute;
+  box-shadow: black 2px 2px 5px;
+  z-index: 3000;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
   text-align: center;
-`;
-
-const AlertBox = styled.section`
+  padding: 5px;
   background-color: ${({ color }) => color};
-  padding: 4em;
 `;
 
 const AlertText = styled.div`
   font-family: Arial;
   color: #fff;
-  font-size: 150%;
 `;
 
 const CloseButton = styled.button`
+  float: right;
   font-size: 1em;
-  margin: 0.5em;
   padding: 0.05em 0.75em;
   border: 1px solid black;
   border-radius: 3px;
@@ -41,14 +43,12 @@ const Alert = props => {
   }, []);
 
   return (
-    <MainStyle>
-      <AlertBox color={alertStore.color}>
-        <AlertText>
-          <Message>{alertStore.message}</Message>
-          <CloseButton onClick={() => alertStore.close()}>X</CloseButton>
-        </AlertText>
-      </AlertBox>
-    </MainStyle>
+    <StyledAlert color={alertStore.color}>
+      <AlertText>
+        <Message>{alertStore.message}</Message>
+        <CloseButton onClick={() => alertStore.close()}>X</CloseButton>
+      </AlertText>
+    </StyledAlert>
   );
 };
 
