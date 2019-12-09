@@ -19,11 +19,11 @@ class TeamStore {
 
         if (res) {
           const resolved = await res.json();
-          console.log(resolved.data.team); // log data from response
           if (resolved.error) {
             console.log(resolved.error);
             throw new Error(resolved.error.message);
           }
+          console.log(resolved.data.team); // log data from response
         }
       } catch (e) {
         console.error(e);
