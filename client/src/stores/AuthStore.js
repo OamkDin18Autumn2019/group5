@@ -42,15 +42,13 @@ class AuthStore {
 
         if (res) {
           const resolved = await res.json();
-          if (resolved.error.errors) {
+          if (res.ok) {
+            await this.fetchToken(username, password);
+          } else if (resolved.error.errors) {
             throw new Error(Object.values(resolved.error.errors)[0]);
-          }
-          if (resolved.error.message) {
+          } else if (resolved.error.message) {
             throw new Error(resolved.error.message);
           }
-        }
-        if (res.ok) {
-          await this.fetchToken(username, password);
         }
       } catch (e) {
         console.error(e);
