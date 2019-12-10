@@ -16,11 +16,21 @@ const insertTeam = (knex, { name, gameId, captainId }) =>
   knex.insert({ name, gameId, captainId }).into('team');
 
 const getTeamRoster = (knex, { teamId, playerId }) => {
-  const query = knex('team_roster').where({ teamId });
+  const subQuery = knex
+    .column('playerId')
+    .select()
+    .from('team_roster')
+    .where({ teamId });
 
   if (playerId) {
-    query.where({ playerId }).first();
+    subQuery.where({ playerId }).first();
   }
+
+  const query = knex
+    .column(['id', 'username', 'email'])
+    .select()
+    .from('player')
+    .whereIn('id', subQuery);
 
   return query;
 };
