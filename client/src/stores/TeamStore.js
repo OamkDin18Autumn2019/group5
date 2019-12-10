@@ -27,7 +27,7 @@ class TeamStore {
         }
       } catch (e) {
         console.error(e);
-        //this.rootStore.alertStore
+        this.rootStore.alertStore.initError(e.message);
       }
     }
   }
