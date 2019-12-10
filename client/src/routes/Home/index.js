@@ -27,12 +27,23 @@ const Home = props => {
   const { appStore } = props.rootStore;
 
   return (
-    <StyledHome>
-      <Section>
-        <NavBar />
-        <GameList />
-      </Section>
-    </StyledHome>
+    <>
+      {appStore.accessToken ? (
+        <StyledHome>
+          <Section>
+            <NavBar />
+            <GameList />
+          </Section>
+        </StyledHome>
+      ) : (
+        <StyledHome>
+          <Section>
+            <NavBar />
+            <GameList />
+          </Section>
+        </StyledHome>
+      )}
+    </>
   );
 };
 
