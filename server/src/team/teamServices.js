@@ -9,6 +9,18 @@ const getTeams = async (knex, { gameId }) => {
   return teams;
 };
 
+const getTeam = async (knex, { id }) => {
+  const teamData = await teamQueries.getTeamById(knex, id);
+
+  if (!teamData) {
+    throw new Error('Team does not exist');
+  }
+
+  const team = new Team(teamData);
+
+  return team;
+};
+
 const registerTeam = async (knex, { name, gameId, captainId }) => {
   const teamData = await knex.transaction(async trx => {
     const teamId = await teamQueries.insertTeam(trx, {
@@ -50,4 +62,4 @@ const addPlayerToTeam = async (knex, { playerId, teamId }) => {
   return teamRosterId;
 };
 
-module.exports = { getTeams, registerTeam, addPlayerToTeam };
+module.exports = { getTeams, getTeam, registerTeam, addPlayerToTeam };

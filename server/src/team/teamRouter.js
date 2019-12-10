@@ -20,6 +20,18 @@ const getTeams = async (req, res, next) => {
   }
 };
 
+const getTeam = async (req, res, next) => {
+  const { knex, getTeamData } = req.context;
+
+  try {
+    const team = await teamServices.getTeam(knex, getTeamData);
+
+    return res.data(200, { team });
+  } catch (e) {
+    return next(e);
+  }
+};
+
 const registerTeam = async (req, res, next) => {
   const { knex, teamRegistrationData } = req.context;
 
@@ -40,6 +52,7 @@ const registerTeam = async (req, res, next) => {
 };
 
 teamRouter.get('/', [teamValidations.getTeams, getTeams]);
+teamRouter.get('/:id', [teamValidations.getTeam, getTeam]);
 teamRouter.post('/', [teamValidations.teamRegistration, registerTeam]);
 
 module.exports = teamRouter;

@@ -16,6 +16,12 @@ const gameIdCheck = check('gameId')
   .isEmpty()
   .isInt();
 
+const teamIdCheck = check('id')
+  .toInt()
+  .not()
+  .isEmpty()
+  .isInt();
+
 const validate = (req, res, next) => {
   const errors = validationResult(req).formatWith(({ msg }) => msg);
 
@@ -37,6 +43,19 @@ const getTeams = [
     next();
   }
 ];
+
+const getTeam = [
+  teamIdCheck,
+  validate,
+  (req, res, next) => {
+    const { id } = req.params;
+
+    req.context.getTeamData = { id };
+
+    next();
+  }
+];
+
 const teamRegistration = [
   nameCheck,
   gameIdCheck,
@@ -51,4 +70,4 @@ const teamRegistration = [
   }
 ];
 
-module.exports = { getTeams, teamRegistration };
+module.exports = { getTeams, getTeam, teamRegistration };
