@@ -1,4 +1,5 @@
 const Team = require('./Team');
+const Player = require('../players/Player');
 const teamQueries = require('./teamQueries');
 
 const getTeams = async (knex, { gameId }) => {
@@ -16,7 +17,11 @@ const getTeam = async (knex, { id }) => {
     throw new Error('Team does not exist');
   }
 
-  const team = new Team(teamData);
+  const playersData = await teamQueries.getTeamRoster(knex, { teamId: id });
+
+  const players = playersData.map(playerData => new Player(playerData));
+
+  const team = new Team({ ...teamData, players });
 
   return team;
 };
