@@ -10,6 +10,8 @@ const getTeamByName = (knex, { name, gameId }) =>
     .andWhere({ gameId })
     .first();
 
+const getTeamsByGame = (knex, gameId) => knex.from('team').where({ gameId });
+
 const insertTeam = (knex, { name, gameId, captainId }) =>
   knex.insert({ name, gameId, captainId }).into('team');
 
@@ -32,6 +34,7 @@ const insertTeamRoster = (knex, { playerId, teamId }) =>
 module.exports = {
   getTeamById,
   getTeamByName,
+  getTeamsByGame,
   insertTeam,
   getTeamRoster,
   insertTeamRoster

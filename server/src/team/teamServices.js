@@ -1,6 +1,14 @@
 const Team = require('./Team');
 const teamQueries = require('./teamQueries');
 
+const getTeams = async (knex, { gameId }) => {
+  const teamsData = await teamQueries.getTeamsByGame(knex, gameId);
+
+  const teams = teamsData.map(teamData => new Team(teamData));
+
+  return teams;
+};
+
 const registerTeam = async (knex, { name, gameId, captainId }) => {
   const teamData = await knex.transaction(async trx => {
     const teamId = await teamQueries.insertTeam(trx, {
@@ -42,4 +50,4 @@ const addPlayerToTeam = async (knex, { playerId, teamId }) => {
   return teamRosterId;
 };
 
-module.exports = { registerTeam, addPlayerToTeam };
+module.exports = { getTeams, registerTeam, addPlayerToTeam };
