@@ -10,15 +10,27 @@ const getTeamByName = (knex, { name, gameId }) =>
     .andWhere({ gameId })
     .first();
 
+const getTeamsByGame = (knex, gameId) => knex.from('team').where({ gameId });
+
 const insertTeam = (knex, { name, gameId, captainId }) =>
   knex.insert({ name, gameId, captainId }).into('team');
 
 const getTeamRoster = (knex, { teamId, playerId }) => {
-  const query = knex('team_roster').where({ teamId });
+  const subQuery = knex
+    .column('playerId')
+    .select()
+    .from('team_roster')
+    .where({ teamId });
 
   if (playerId) {
-    query.where({ playerId }).first();
+    subQuery.where({ playerId }).first();
   }
+
+  const query = knex
+    .column(['id', 'username', 'email'])
+    .select()
+    .from('player')
+    .whereIn('id', subQuery);
 
   return query;
 };
@@ -32,6 +44,7 @@ const insertTeamRoster = (knex, { playerId, teamId }) =>
 module.exports = {
   getTeamById,
   getTeamByName,
+  getTeamsByGame,
   insertTeam,
   getTeamRoster,
   insertTeamRoster

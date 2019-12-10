@@ -8,6 +8,30 @@ const teamRouter = new Router();
 
 teamRouter.use(passport.authenticate('jwt', { session: false }));
 
+const getTeams = async (req, res, next) => {
+  const { knex, getTeamsData } = req.context;
+
+  try {
+    const teams = await teamServices.getTeams(knex, getTeamsData);
+
+    return res.data(200, { teams });
+  } catch (e) {
+    return next(e);
+  }
+};
+
+const getTeam = async (req, res, next) => {
+  const { knex, getTeamData } = req.context;
+
+  try {
+    const team = await teamServices.getTeam(knex, getTeamData);
+
+    return res.data(200, { team });
+  } catch (e) {
+    return next(e);
+  }
+};
+
 const registerTeam = async (req, res, next) => {
   const { knex, teamRegistrationData } = req.context;
 
@@ -27,6 +51,8 @@ const registerTeam = async (req, res, next) => {
   }
 };
 
+teamRouter.get('/', [teamValidations.getTeams, getTeams]);
+teamRouter.get('/:id', [teamValidations.getTeam, getTeam]);
 teamRouter.post('/', [teamValidations.teamRegistration, registerTeam]);
 
 module.exports = teamRouter;
