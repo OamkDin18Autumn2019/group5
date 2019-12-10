@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
-import './index.module.css';
+
+const Section = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #20242e;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+`;
 
 const RegisterStyle = styled.div`
   position: relative;
@@ -138,46 +148,21 @@ const Auth = props => {
   return (
     <>
       {props.location.pathname === '/register' ? (
-        <RegisterStyle>
-          <Container>
-            <Title>Sign up</Title>
-            <Input
-              type="text"
-              value={username}
-              onChange={changeUsername}
-              placeholder="Username"
-            />
-            <Input
-              type="text"
-              value={email}
-              onChange={changeEmail}
-              placeholder="E-mail"
-            />
-            <Input
-              type="password"
-              value={password}
-              onChange={changePassword}
-              placeholder="Password"
-            />
-            <Input
-              type="password"
-              value={passwordConfirmation}
-              onChange={changePasswordConfirmation}
-              placeholder="Retype password"
-            />
-            <Button onClick={action}>{actionName}</Button>
-          </Container>
-        </RegisterStyle>
-      ) : (
-        <LoginStyle>
-          <Container>
-            <div>
-              <Title>Login</Title>
+        <Section>
+          <RegisterStyle>
+            <Container>
+              <Title>Sign up</Title>
               <Input
                 type="text"
                 value={username}
                 onChange={changeUsername}
-                placeholder="Username or Email"
+                placeholder="Username"
+              />
+              <Input
+                type="text"
+                value={email}
+                onChange={changeEmail}
+                placeholder="E-mail"
               />
               <Input
                 type="password"
@@ -185,10 +170,39 @@ const Auth = props => {
                 onChange={changePassword}
                 placeholder="Password"
               />
+              <Input
+                type="password"
+                value={passwordConfirmation}
+                onChange={changePasswordConfirmation}
+                placeholder="Retype password"
+              />
               <Button onClick={action}>{actionName}</Button>
-            </div>
-          </Container>
-        </LoginStyle>
+            </Container>
+          </RegisterStyle>
+        </Section>
+      ) : (
+        <Section>
+          <LoginStyle>
+            <Container>
+              <div>
+                <Title>Login</Title>
+                <Input
+                  type="text"
+                  value={username}
+                  onChange={changeUsername}
+                  placeholder="Username or Email"
+                />
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={changePassword}
+                  placeholder="Password"
+                />
+                <Button onClick={action}>{actionName}</Button>
+              </div>
+            </Container>
+          </LoginStyle>
+        </Section>
       )}
     </>
   );
