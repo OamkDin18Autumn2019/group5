@@ -42,8 +42,10 @@ class AuthStore {
 
         if (res) {
           const resolved = await res.json();
-          if (resolved.error) {
-            console.log(resolved.error);
+          if (resolved.error.errors) {
+            throw new Error(Object.values(resolved.error.errors)[0]);
+          }
+          if (resolved.error.message) {
             throw new Error(resolved.error.message);
           }
         }
@@ -52,7 +54,13 @@ class AuthStore {
         }
       } catch (e) {
         console.error(e);
-        //this.rootStore.alertStore
+
+        if (e && e.errors) {
+          this.rootStore.alertStore.initError(e.errors);
+        }
+        if (e.message) {
+          this.rootStore.alertStore.initError(e.message);
+        }
       }
     }
   }
