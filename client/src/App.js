@@ -18,9 +18,9 @@ const App = observer(props => {
       {alertStore.isOpen && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/register-team" component={Team} />
         <Route exact path="/register" component={Auth} />
         <Route exact path="/login" component={Auth} />
+        <Route exact path="/create-team" component={Team} />
       </Switch>
     </>
   );
