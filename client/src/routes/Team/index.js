@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 import './index.module.css';
-import StyledForm from './StyledForm';
+import CreateTeamForm from './CreateTeamForm';
 
 const MainStyle = styled.div`
   position: relative;
@@ -35,11 +35,11 @@ const Title = styled.h1`
 const Team = props => {
   return (
     <>
-      {props.location.pathname === '/register-team' ? (
+      {props.location.pathname === '/create-team' ? (
         <MainStyle>
           <Container>
             <Title>Register a Team</Title>
-            <StyledForm />
+            <CreateTeamForm />
           </Container>
         </MainStyle>
       ) : (

@@ -70,7 +70,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const StyledForm = props => {
+const CreateTeamForm = props => {
   const { appStore, teamStore } = props.rootStore;
 
   const [name, setName] = useState('');
@@ -117,4 +117,4 @@ const StyledForm = props => {
   );
 };
 
-export default inject('rootStore')(observer(StyledForm));
+export default inject('rootStore')(observer(CreateTeamForm));
