@@ -60,11 +60,20 @@ const NavBar = props => {
   const { appStore } = props.rootStore;
 
   return (
-    <StyledNavBar>
-      <Title>Global e-Sports</Title>
-      <NavBarLink to="/login">Login</NavBarLink>
-      <NavBarLink to="/register">Register</NavBarLink>
-    </StyledNavBar>
+    <>
+      {appStore.accessToken ? (
+        <StyledNavBar>
+          <Title>Global E-sports</Title>
+          <NavBarLink to="/create-team">Create Team</NavBarLink>
+        </StyledNavBar>
+      ) : (
+        <StyledNavBar>
+          <Title>Global E-sports</Title>
+          <NavBarLink to="/login">Login</NavBarLink>
+          <NavBarLink to="/register">Register</NavBarLink>
+        </StyledNavBar>
+      )}
+    </>
   );
 };
 
