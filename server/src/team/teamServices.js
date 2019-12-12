@@ -1,5 +1,30 @@
 const Team = require('./Team');
+const Player = require('../players/Player');
 const teamQueries = require('./teamQueries');
+
+const getTeams = async (knex, { gameId }) => {
+  const teamsData = await teamQueries.getTeamsByGame(knex, gameId);
+
+  const teams = teamsData.map(teamData => new Team(teamData));
+
+  return teams;
+};
+
+const getTeam = async (knex, { id }) => {
+  const teamData = await teamQueries.getTeamById(knex, id);
+
+  if (!teamData) {
+    throw new Error('Team does not exist');
+  }
+
+  const playersData = await teamQueries.getTeamRoster(knex, { teamId: id });
+
+  const players = playersData.map(playerData => new Player(playerData));
+
+  const team = new Team({ ...teamData, players });
+
+  return team;
+};
 
 const registerTeam = async (knex, { name, gameId, captainId }) => {
   const teamData = await knex.transaction(async trx => {
@@ -42,4 +67,4 @@ const addPlayerToTeam = async (knex, { playerId, teamId }) => {
   return teamRosterId;
 };
 
-module.exports = { registerTeam, addPlayerToTeam };
+module.exports = { getTeams, getTeam, registerTeam, addPlayerToTeam };

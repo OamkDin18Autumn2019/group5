@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { Switch, Route, withRouter } from 'react-router';
 import Home from './routes/Home';
 import Team from './routes/Team';
+import Auth from './routes/Auth';
 import Alert from './components/Alert';
 
 const App = observer(props => {
@@ -18,6 +19,8 @@ const App = observer(props => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/register-team" component={Team} />
+        <Route exact path="/register" component={Auth} />
+        <Route exact path="/login" component={Auth} />
       </Switch>
     </>
   );

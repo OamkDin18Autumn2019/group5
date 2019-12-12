@@ -157,10 +157,12 @@
         {
           "loose": true
         }
-      ]
+      ],
+      "@babel/plugin-transform-runtime"
     ],
     "presets": [
-      "react-app"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   }
 }
