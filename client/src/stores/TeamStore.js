@@ -6,11 +6,15 @@ class TeamStore {
   }
 
   async registerTeam(name, gameId) {
+    const { appStore } = this.rootStore;
     if ((name, gameId)) {
       try {
         const res = await fetch('http://localhost:8080/api/v1/teams', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${appStore.accessToken}`
+          },
           body: JSON.stringify({
             name,
             gameId
