@@ -7,21 +7,28 @@ class AuthStore {
 
   async fetchToken(username, password) {
     if (username && password) {
-      const res = await fetch('http://localhost:8080/api/v1/auth/token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      });
+      try {
+        const res = await fetch('http://localhost:8080/api/v1/auth/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username,
+            password
+          })
+        });
 
-      if (res) {
-        const resolved = await res.json();
+        if (res) {
+          const resolved = await res.json();
 
-        if (resolved.data && resolved.data.accessToken) {
-          this.rootStore.appStore.setAccessToken(resolved.data.accessToken);
+          if (resolved.data && resolved.data.accessToken) {
+            this.rootStore.appStore.setAccessToken(resolved.data.accessToken);
+          } else if (resolved.error.message) {
+            throw new Error(resolved.error.message);
+          }
         }
+      } catch (e) {
+        console.error(e);
+        this.rootStore.alertStore.initError(e.message);
       }
     }
   }
@@ -52,13 +59,7 @@ class AuthStore {
         }
       } catch (e) {
         console.error(e);
-
-        if (e && e.errors) {
-          this.rootStore.alertStore.initError(e.errors);
-        }
-        if (e.message) {
-          this.rootStore.alertStore.initError(e.message);
-        }
+        this.rootStore.alertStore.initError(e.message);
       }
     }
   }
