@@ -28,7 +28,7 @@ const Home = props => {
 
   return (
     <>
-      {appStore.accessToken ? (
+      {appStore.authenticated ? (
         <StyledHome>
           <Section>
             <NavBar />

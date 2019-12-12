@@ -17,6 +17,7 @@ class AppStore {
   }
 
   @action init() {
+    this.accessToken = localStorage.getItem('accessToken') || null;
     this.initialized = true;
   }
 
@@ -30,10 +31,15 @@ class AppStore {
     this.accessToken = accessToken;
     localStorage.setItem('accessToken', accessToken);
   }
+  get authenticated() {
+    return !!this.accessToken;
+  }
 }
 
 decorate(AppStore, {
-  accessToken: observable
+  accessToken: observable,
+  setAccessToken: action.bound,
+  authenticated: computed
 });
 
 export default AppStore;

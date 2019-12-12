@@ -19,7 +19,7 @@ const Section = styled.div`
 const Auth = props => {
   const { appStore, authStore } = props.rootStore;
 
-  if (appStore.accessToken) {
+  if (appStore.authenticated) {
     return <Redirect to="/" />;
   }
 
