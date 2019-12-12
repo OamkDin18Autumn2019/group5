@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
-import RegisterFrom from './RegisterFrom';
+import RegisterForm from './RegisterFrom';
 import LoginForm from './LoginForm';
 
 const Section = styled.div`
@@ -27,7 +27,7 @@ const Auth = props => {
     <>
       {props.location.pathname === '/register' ? (
         <Section>
-          <RegisterFrom />
+          <RegisterForm />
         </Section>
       ) : (
         <Section>
