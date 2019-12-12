@@ -89,7 +89,7 @@ const Button = styled.button`
   }
 `;
 
-const Auth = props => {
+const RegisterForm = props => {
   const { authStore } = props.rootStore;
 
   const [username, setUsername] = useState('');
@@ -159,4 +159,4 @@ const Auth = props => {
   );
 };
 
-export default inject('rootStore')(observer(Auth));
+export default inject('rootStore')(observer(RegisterForm));
