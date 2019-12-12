@@ -5,4 +5,9 @@ const commonResponse = (req, res, next) => {
   next();
 };
 
-module.exports = { commonResponse };
+const context = knex => (req, res, next) => {
+  req.context = { knex };
+  next();
+};
+
+module.exports = { commonResponse, context };
