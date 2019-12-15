@@ -14,6 +14,7 @@ class AppStore {
     this.rootStore = rootStore;
     this.accessToken = null;
     this.initialized = false;
+    this.gameId = null;
   }
 
   @action init() {
@@ -29,6 +30,9 @@ class AppStore {
   @action setAccessToken(accessToken) {
     this.accessToken = accessToken;
     localStorage.setItem('accessToken', accessToken);
+  }
+  @action setGameIdCs() {
+    this.gameId = 1;
   }
 }
 

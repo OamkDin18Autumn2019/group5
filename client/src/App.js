@@ -4,6 +4,7 @@ import { Switch, Route, withRouter } from 'react-router';
 import Home from './routes/Home';
 import Alert from './components/Alert';
 import Team from './routes/Team';
+import Games from './routes/Games';
 
 const App = observer(props => {
   const { alertStore, appStore } = props.rootStore;
@@ -17,7 +18,24 @@ const App = observer(props => {
       {alertStore.isOpen && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/team-page" component={Team} />
+        <Route exact path="/teams-page" component={Team} />
+        <Route
+          exact
+          path="/counter-strike-global-offensive"
+          render={props => (
+            <Games {...props} game={'counter-strike-global-offensive'} />
+          )}
+        />
+        <Route
+          exact
+          path="/league-of-legends"
+          render={props => <Games {...props} game={'league-of-legends'} />}
+        />
+        <Route
+          exact
+          path="/dota-2"
+          render={props => <Games {...props} game={'dota-2'} />}
+        />
       </Switch>
     </>
   );

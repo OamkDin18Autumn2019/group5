@@ -1,6 +1,8 @@
-import { decorate, action } from 'mobx';
+import { decorate, action, observable } from 'mobx';
 
 class TeamStore {
+  @observable teams = [];
+
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
@@ -34,15 +36,19 @@ class TeamStore {
 
   async getTeamDataById() {
     try {
-      const res = await fetch('http://localhost:8080/api/v1/teams?gameId=1', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
+      const res = await fetch(
+        `http://localhost:8080/api/v1/teams?gameId=${this.rootStore.gamesStore.gameId}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
 
       if (res) {
         const resolved = await res.json();
         console.log(resolved);
         if (resolved.data) {
+          this.teams = resolved.data.teams;
         } else if (resolved.error.message) {
           throw new Error('Something went wrong!');
         }

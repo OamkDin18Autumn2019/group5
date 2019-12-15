@@ -16,15 +16,8 @@ const Team = props => {
     overflow: hidden;
   `;
 
-  const getTeam = async () => {
-    await teamStore.getTeamDataById();
-  };
-
-  return (
-    <Section>
-      <button onClick={getTeam}>lol</button>
-    </Section>
-  );
+  console.log(teamStore.teams);
+  return <Section></Section>;
 };
 
 export default inject('rootStore')(observer(Team));

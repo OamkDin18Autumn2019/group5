@@ -12,7 +12,7 @@ const Logo = styled.img`
 
 const Title = styled.span``;
 
-const GameButton = ({ link, logo, title }) => {
+const GameButton = ({ link, logo, title, onClick }) => {
   const StyledGameButton = styled(NavBarLink)`
     display: block;
     width: 400px;
@@ -22,7 +22,7 @@ const GameButton = ({ link, logo, title }) => {
   `;
 
   return (
-    <StyledGameButton to={link}>
+    <StyledGameButton onClick={onClick} to={link}>
       <Title>{title}</Title>
       <Logo src={logo} />
     </StyledGameButton>
