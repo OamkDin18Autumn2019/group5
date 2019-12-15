@@ -18,6 +18,7 @@ class AppStore {
   }
 
   @action init() {
+    this.accessToken = localStorage.getItem('accessToken') || null;
     this.initialized = true;
   }
 
@@ -34,10 +35,16 @@ class AppStore {
   @action setGameIdCs() {
     this.gameId = 1;
   }
+
+  get authenticated() {
+    return !!this.accessToken;
+  }
 }
 
 decorate(AppStore, {
-  accessToken: observable
+  accessToken: observable,
+  setAccessToken: action.bound,
+  authenticated: computed
 });
 
 export default AppStore;

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Switch, Route, withRouter } from 'react-router';
 import Home from './routes/Home';
+import Auth from './routes/Auth';
 import Alert from './components/Alert';
 import Team from './routes/Team';
 import Games from './routes/Games';
@@ -36,6 +37,8 @@ const App = observer(props => {
           path="/dota-2"
           render={props => <Games {...props} game={'dota-2'} />}
         />
+        <Route exact path="/register" component={Auth} />
+        <Route exact path="/login" component={Auth} />
       </Switch>
     </>
   );
