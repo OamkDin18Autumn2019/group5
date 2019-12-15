@@ -37,7 +37,7 @@ class TeamStore {
   async getTeamDataById() {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/v1/teams?gameId=${this.rootStore.gamesStore.gameId}`,
+        `http://localhost:8080/api/v1/teams?gameId=${this.rootStore.gamesStore.selectedGameId}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
