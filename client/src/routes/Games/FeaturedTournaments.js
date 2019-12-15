@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 const Table = styled.table``;
 
-const TableHead = styled.th``;
-
 const TableData = styled.td``;
 
 const FeaturedTournaments = props => {
@@ -14,7 +12,6 @@ const FeaturedTournaments = props => {
 
   return (
     <Table>
-      <TableHead />
       <tbody>
         <tr>
           <TableData>Featured Tournaments</TableData>
