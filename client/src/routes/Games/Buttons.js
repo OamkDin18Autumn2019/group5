@@ -24,7 +24,7 @@ const Buttons = props => {
     text-align: center;
     margin-left: 1%;
     margin-right: 1%;
-    margin-top: 3%;
+    margin-top: 1%;
   `;
 
   const Styled = styled.div`
@@ -35,6 +35,10 @@ const Buttons = props => {
     text-align: center;
   `;
 
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+  `;
+
   const getTeamData = async () => {
     await teamStore.getTeamDataById();
   };
@@ -42,9 +46,9 @@ const Buttons = props => {
   return (
     <Styled>
       <StyledText>Play </StyledText>
-      <Link to="/teams-page" onClick={getTeamData}>
+      <StyledLink to="/teams-page" onClick={getTeamData}>
         <StyledText>Search Teams</StyledText>
-      </Link>
+      </StyledLink>
     </Styled>
   );
 };

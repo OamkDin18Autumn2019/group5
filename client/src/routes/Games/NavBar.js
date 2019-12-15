@@ -22,14 +22,14 @@ const Logo = styled.img`
   width: 70px;
   height: 70px;
   vertical-align: middle;
-  margin-right: 2%;
+  margin-left: 50px;
 `;
 
 const Profile = styled.div`
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
   color: #fff;
-  margin-left: 1%;
+  margin-left: 9px;
 `;
 
 const ProfileLogo = styled.img`
@@ -37,7 +37,14 @@ const ProfileLogo = styled.img`
   width: 30px;
   height: 30px;
   vertical-align: middle;
-  margin-left: 100px;
+`;
+
+const StyledLink = styled(Link)`
+  width: 150px;
+  text-decoration: none;
+  align-content: center;
+  align-items: center;
+  align-text: center;
 `;
 
 const NavBar = props => {
@@ -45,17 +52,19 @@ const NavBar = props => {
 
   return (
     <StyledNavBar>
-      <Link to="/counter-strike-global-offensive">
+      <Link to={gamesStore.selectedGame.name}>
         <Logo src={gamesStore.selectedGame.logo} />
       </Link>
-      <Link to="/profile-page">
-        <ProfileLogo
-          src={
-            'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
-          }
-        />
-      </Link>
-      <Profile>JyrGi</Profile>
+      <StyledLink to="/profile-page">
+        <Profile>
+          JyrGi{' '}
+          <ProfileLogo
+            src={
+              'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
+            }
+          />{' '}
+        </Profile>
+      </StyledLink>
     </StyledNavBar>
   );
 };
