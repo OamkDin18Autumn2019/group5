@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
-import './index.module.css';
 import CreateTeamForm from './CreateTeamForm';
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #20242e;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-family: Roboto, sans-serif;
+`;
 
 const MainStyle = styled.div`
   position: relative;
@@ -33,17 +45,33 @@ const Title = styled.h1`
 `;
 
 const Team = props => {
+  const { teamStore } = props.rootStore;
+
+  if (teamStore.redirect) {
+    return <Redirect to={`team-page/${teamStore.teamData.id}`} />;
+  }
+
   return (
     <>
       {props.location.pathname === '/create-team' ? (
-        <MainStyle>
-          <Container>
-            <Title>Register a Team</Title>
-            <CreateTeamForm />
-          </Container>
-        </MainStyle>
+        <Background>
+          <MainStyle>
+            <Container>
+              <Title>Create a Team</Title>
+              <CreateTeamForm />
+            </Container>
+          </MainStyle>
+        </Background>
       ) : (
-        ''
+        <Background>
+          <MainStyle>
+            <Container>
+              <Title>Team page</Title>
+              <h1>NAME: {teamStore.teamData.name}</h1>
+              <h1>TEAM ID:{teamStore.teamData.id}</h1>
+            </Container>
+          </MainStyle>
+        </Background>
       )}
     </>
   );

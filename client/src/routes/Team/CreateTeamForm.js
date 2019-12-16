@@ -109,7 +109,7 @@ const CreateTeamForm = props => {
           League of Legends
         </Option>
       </Select>
-      <SubmitButton onClick={registerTeam}>Register</SubmitButton>
+      <SubmitButton onClick={registerTeam}>Create</SubmitButton>
     </>
   );
 };
