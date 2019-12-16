@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
 
 const Input = styled.input`
   display: block;
@@ -11,7 +12,6 @@ const Input = styled.input`
   height: 32px;
   border: none;
   border-bottom: 1px solid #aaa;
-  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 16px;
   transition: 0.2s ease;
@@ -24,7 +24,6 @@ const Input = styled.input`
 
 const Select = styled.select`
   font-weight: 300;
-  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: #20242e;
   width: 220px;
@@ -32,7 +31,6 @@ const Select = styled.select`
 
 const Option = styled.option`
   font-weight: 300;
-  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: #20242e;
   width: 220px;
@@ -46,7 +44,6 @@ const SubmitButton = styled.button`
   background: #7de88c;
   border: none;
   color: #fff;
-  font-family: Roboto, sans-serif;
   font-weight: 650;
   text-transform: uppercase;
   transition: 0.1s ease;
