@@ -63,11 +63,16 @@ class AuthStore {
       }
     }
   }
+
+  logout() {
+    this.rootStore.appStore.reset();
+  }
 }
 
 decorate(AuthStore, {
   fetchToken: action.bound,
-  register: action.bound
+  register: action.bound,
+  reset: action.bound
 });
 
 export default AuthStore;
