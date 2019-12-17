@@ -21,38 +21,85 @@ const ListTeams = props => {
   const Section = styled.div`
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
     background: #20242e;
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
-    overflow: hidden;
+    font-family: Roboto, sans-serif;
+  `;
+  const Title = styled.h1`
+    margin: 0;
+    font-weight: 300;
+    font-size: 28px;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 20px;
   `;
 
-  const Table = styled.table``;
+  const Container = styled.div`
+    display: flex;
+    justify-content: center;
+  `;
 
-  const TableData = styled.td``;
+  const BlockDiv = styled.div`
+    margin-bottom: 5px;
+  `;
+
+  const Tbody = styled.div`
+    width: 50%;
+  `;
+
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+    widht: 100%;
+    border: none;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+    padding: 0;
+    margin: 10px;
+    margin-bottom: 0;
+  `;
+
+  const Table = styled.div`
+    display: flex;
+    justify-content: left;
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+    padding-left: 10px;
+  `;
+
+  const TeamData = styled.div`
+    color: #fff;
+    height: 15px;
+    border-bottom: 1px solid;
+    padding: 10px;
+  `;
   console.log(teamStore.teams);
 
   return (
     <Section>
-      <Table>
-        <tbody>
-          <tr>
-            <TableData>Teams</TableData>
-          </tr>
+      <Container>
+        <Tbody>
+          <Title>Teams for CSGO</Title>
           {teamStore.teams.map(team => (
-            <tr>
-              <Link to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}>
-                <TableData>{team.name}</TableData>
-                <TableData>
+            <StyledLink
+              to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}
+            >
+              <BlockDiv>
+                <Table>{team.name}</Table>
+                <TeamData>
                   Recruiting: {team.recruiting ? 'Yes' : 'No'}
-                </TableData>
-              </Link>
-            </tr>
+                </TeamData>
+              </BlockDiv>
+            </StyledLink>
           ))}
-        </tbody>
-      </Table>
+        </Tbody>
+      </Container>
     </Section>
   );
 };
