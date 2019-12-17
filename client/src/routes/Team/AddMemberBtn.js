@@ -2,18 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  width: 650px;
+  font-family: 'Roboto', sans-serif;
+`;
+
 const Input = styled.input`
   display: block;
   box-sizing: border-box;
   margin-bottom: 20px;
   padding: 4px;
-  width: 220px;
-  height: 32px;
+  width: 150px;
+  height: 26px;
   border: none;
   border-bottom: 1px solid #20242e;
-  font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-left: 500px;
   transition: 0.2s ease;
   &:focus {
     border-bottom: 2px solid #636363;
@@ -73,15 +79,15 @@ const AddMemberBtn = props => {
   };
 
   return (
-    <>
+    <Container>
+      <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
       <Input
         type="text"
         value={username}
         onChange={changeUsername}
-        placeholder="Username or Email"
+        placeholder="Search for players"
       />
-      <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
-    </>
+    </Container>
   );
 };
 
