@@ -1,11 +1,18 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Link,
+  useRouteMatch,
+  Switch,
+  Route
+} from 'react-router-dom';
+import ListTeams from '../ListTeams';
 
 const Buttons = props => {
   const { teamStore } = props.rootStore;
-
+  const { url } = useRouteMatch();
   const StyledText = styled.p`
     text-decoration: none;
     width: 80px;
@@ -46,7 +53,7 @@ const Buttons = props => {
   return (
     <Styled>
       <StyledText>Play </StyledText>
-      <StyledLink to="/teams-page" onClick={getTeamData}>
+      <StyledLink to={`${url}/teams-page`} onClick={getTeamData}>
         <StyledText>Search Teams</StyledText>
       </StyledLink>
     </Styled>
