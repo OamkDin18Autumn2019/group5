@@ -24,7 +24,7 @@ const getTeam = async (req, res, next) => {
   const { knex, getTeamData } = req.context;
 
   try {
-    const team = await teamServices.getTeam(knex, getTeamData);
+    const team = await teamServices.getTeam(knex, getTeamData, req.user.id);
 
     return res.data(200, { team });
   } catch (e) {

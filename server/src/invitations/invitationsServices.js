@@ -1,7 +1,27 @@
 const authQueries = require('../auth/authQueries');
 const invitationsQueries = require('./invitationsQueries');
 const teamQueries = require('../team/teamQueries');
-const { addPlayerToTeam } = require('../team/teamServices');
+const { getTeam, addPlayerToTeam } = require('../team/teamServices');
+
+const getInvitations = async (knex, playerId) => {
+  const invitationsData = await invitationsQueries.getInvitationsByPlayerAndTeam(
+    knex,
+    { playerId }
+  );
+
+  return invitationsData.map(data => {
+    return {
+      id: data.id,
+      state: data.state,
+      game: { id: data.gameId, name: data.gameName },
+      team: {
+        id: data.teamId,
+        name: data.teamName,
+        captainName: data.captainName
+      }
+    };
+  });
+};
 
 const invitePlayerToTeam = async (knex, { username, teamId }) => {
   const playerData = await authQueries.getUserByUsernameOrEmail(knex, username);
@@ -23,10 +43,13 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
     throw error;
   }
 
-  const existingInvitation = await invitationsQueries.getInvitationByPlayerAndTeam(
-    knex,
-    { playerId: playerData.id, teamId, state: 'pending' }
-  );
+  const existingInvitation = await invitationsQueries
+    .getInvitationsByPlayerAndTeam(knex, {
+      playerId: playerData.id,
+      teamId,
+      state: 'pending'
+    })
+    .first();
 
   if (existingInvitation) {
     const error = new Error(
@@ -93,4 +116,4 @@ const updateInvitationState = async (knex, { id, playerId, state }) => {
   return updatedInvitationData;
 };
 
-module.exports = { invitePlayerToTeam, updateInvitationState };
+module.exports = { getInvitations, invitePlayerToTeam, updateInvitationState };
