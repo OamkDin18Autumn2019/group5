@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ListTeams = props => {
   const { appStore, teamStore, gamesStore } = props.rootStore;
@@ -40,12 +41,14 @@ const ListTeams = props => {
           <tr>
             <TableData>Teams</TableData>
           </tr>
-          {teamStore.teams.map(teams => (
+          {teamStore.teams.map(team => (
             <tr>
-              <TableData>{teams.name}</TableData>
-              <TableData>
-                Recruiting: {teams.recruiting ? 'Yes' : 'No'}
-              </TableData>
+              <Link to={`/${gamesStore.games.name}/teams/${team.id}`}>
+                <TableData>{team.name}</TableData>
+                <TableData>
+                  Recruiting: {team.recruiting ? 'Yes' : 'No'}
+                </TableData>
+              </Link>
             </tr>
           ))}
         </tbody>
