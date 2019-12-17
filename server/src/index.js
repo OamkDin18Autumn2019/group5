@@ -6,6 +6,8 @@ const knex = require('./config/database/knex');
 const authRouter = require('./auth/authRouter');
 const teamRouter = require('./team/teamRouter');
 const invitationsRouter = require('./invitations/invitationsRouter');
+const invitationsServices = require('./invitations/invitationsServices');
+const passport = require('./config/passport/passport');
 const { commonResponse, context } = require('./config/utils');
 
 const app = express();
@@ -22,6 +24,17 @@ app.use([
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/teams', teamRouter);
 app.use('/api/v1/invitations', invitationsRouter);
+
+app.get('/api/v1/user', [
+  passport.authenticate('jwt', { session: false }),
+  async (req, res, next) => {
+    const invitations = await invitationsServices.getInvitations(
+      req.context.knex,
+      req.user.id
+    );
+    return res.data(null, { user: req.user, invitations });
+  }
+]);
 
 app.use((err, req, res, next) => {
   console.error(err);
