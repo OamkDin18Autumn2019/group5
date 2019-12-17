@@ -10,12 +10,14 @@ const getTeams = async (knex, { gameId }) => {
   return teams;
 };
 
-const getTeam = async (knex, { id }) => {
+const getTeam = async (knex, { id }, userId) => {
   const teamData = await teamQueries.getTeamById(knex, id);
 
   if (!teamData) {
     throw new Error('Team does not exist');
   }
+
+  const userIsCaptain = teamData.captainId === userId;
 
   const playersData = (await teamQueries.getTeamRoster(knex, {
     teamId: id
@@ -23,9 +25,13 @@ const getTeam = async (knex, { id }) => {
 
   const players = playersData.map(playerData => new Player(playerData));
 
-  const team = new Team({ ...teamData, players });
+  const team = new Team({
+    ...teamData,
+    canInvitePlayers: userIsCaptain,
+    players
+  });
 
-  return team;
+  return { team };
 };
 
 const registerTeam = async (knex, { name, gameId, captainId }) => {
