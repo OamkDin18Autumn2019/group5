@@ -15,9 +15,9 @@ const Buttons = props => {
   const { url } = useRouteMatch();
   const StyledText = styled.p`
     text-decoration: none;
-    width: 80px;
+    width: 200px;
     margin-bottom: 7px;
-    height: 40px;
+    height: 25px;
     background: #7de88c;
     border: none;
     color: #fff;

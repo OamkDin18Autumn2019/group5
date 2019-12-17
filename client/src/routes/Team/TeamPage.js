@@ -35,6 +35,12 @@ const SubTitle = styled.h1`
   color: #fff;
 `;
 
+const Tbody = styled.tbody`
+  background: #32353d;
+
+  padding: 40px;
+`;
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -69,7 +75,7 @@ const TeamPage = props => {
     teamStore.selectedTeam && (
       <Background>
         <Container>
-          <tbody>
+          <Tbody>
             <Title>{teamStore.selectedTeam.name}</Title>
             <SubTitle>
               Team Members <AddMemberBtn></AddMemberBtn>
@@ -80,7 +86,7 @@ const TeamPage = props => {
                   <MemberData key="players">{player.username}</MemberData>
                 ))}
             </>
-          </tbody>
+          </Tbody>
         </Container>
       </Background>
     )

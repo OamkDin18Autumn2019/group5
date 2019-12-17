@@ -35,6 +35,8 @@ const ListTeams = props => {
     color: #fff;
     text-align: left;
     margin-bottom: 10px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
     margin-top: 20px;
   `;
 
@@ -48,7 +50,9 @@ const ListTeams = props => {
   `;
 
   const Tbody = styled.div`
-    width: 50%;
+    width: 30%;
+    background: #32353d;
+    padding: 40px;
   `;
 
   const StyledLink = styled(Link)`
@@ -71,6 +75,8 @@ const ListTeams = props => {
     font-size: 20px;
     font-weight: 200;
     padding-left: 10px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
   `;
 
   const TeamData = styled.div`
@@ -78,6 +84,8 @@ const ListTeams = props => {
     height: 15px;
     border-bottom: 1px solid;
     padding: 10px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
   `;
   console.log(teamStore.teams);
 
