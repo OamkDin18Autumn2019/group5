@@ -2,6 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 
+const Input = styled.input`
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 220px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #20242e;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+  &:focus {
+    border-bottom: 2px solid #636363;
+    color: #20242e;
+    transition: 0.2s ease;
+    outline: none;
+  }
+`;
+
 const AddButton = styled.button`
   text-decoration: none;
   width: 150px;
@@ -35,7 +56,33 @@ const AddButton = styled.button`
 `;
 
 const AddMemberBtn = props => {
-  return <AddButton>+ Add Member</AddButton>;
+  const { teamStore } = props.rootStore;
+
+  const [username, setUsername] = useState('');
+
+  const [teamId, setTeamId] = useState(teamStore.selectedTeamId);
+
+  const changeUsername = e => {
+    setUsername(e.target.value);
+  };
+
+  const invitePlayer = async () => {
+    await teamStore.invitePlayer(username, teamId);
+    setUsername('');
+    setTeamId(teamStore.selectedTeamId);
+  };
+
+  return (
+    <>
+      <Input
+        type="text"
+        value={username}
+        onChange={changeUsername}
+        placeholder="Username or Email"
+      />
+      <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
+    </>
+  );
 };
 
 export default inject('rootStore')(observer(AddMemberBtn));
