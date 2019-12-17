@@ -53,7 +53,7 @@ const Buttons = props => {
   return (
     <Styled>
       <StyledText>Play </StyledText>
-      <StyledLink to={`${url}/teams-page`} onClick={getTeamData}>
+      <StyledLink to={`${url}/teams`} onClick={getTeamData}>
         <StyledText>Search Teams</StyledText>
       </StyledLink>
     </Styled>
