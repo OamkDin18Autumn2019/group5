@@ -25,8 +25,12 @@ const getTeamRoster = (knex, { teamId, playerId }) => {
     FROM player
     LEFT JOIN team_roster
       ON team_roster.playerId = player.id
-    WHERE team_roster.playerId = :playerId
-      AND team_roster.teamId = :teamId;
+    ${
+      playerId
+        ? 'WHERE team_roster.playerId = :playerId AND team_roster.teamId = :teamId;'
+        : 'WHERE team_roster.teamId = :teamId;'
+    }
+      
   `,
     { playerId, teamId }
   );
