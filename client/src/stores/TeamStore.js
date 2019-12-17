@@ -41,6 +41,7 @@ class TeamStore {
   }
 
   async getTeamsDataByGameId() {
+    const { appStore } = this.rootStore;
     try {
       const res = await fetch(
         `http://localhost:8080/api/v1/teams?gameId=${this.rootStore.gamesStore.selectedGameId}`,

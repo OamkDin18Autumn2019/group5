@@ -44,29 +44,25 @@ const Title = styled.h1`
 `;
 
 const TeamPage = props => {
-  const { teamStore } = props.rootStore;
+  const { appStore, teamStore } = props.rootStore;
 
   const id = props.match.params.id;
 
-  const getTeamById = async () => {
-    await teamStore.getTeamById(id);
-  };
-
-  if (!teamStore.reload) {
-    setTimeout(() => getTeamById(), 1);
-  }
+  useEffect(() => {
+    teamStore.getTeamById(id);
+  }, [appStore.initialized]);
 
   return (
     <Background>
       <MainStyle>
         <Container>
           <Title>Team page</Title>
-          <p>TEAM NAME: {teamStore.teamData.name}</p>
-          <p>TEAM ID:{teamStore.teamData.id}</p>
+          <p>TEAM NAME: {teamStore.teams.name}</p>
+          <p>TEAM ID:{teamStore.teams.id}</p>
           <div>
             PLAYERS:{' '}
-            {teamStore.teamData.players &&
-              teamStore.teamData.players.map(player => (
+            {teamStore.teams.players &&
+              teamStore.teams.players.map(player => (
                 <p key="players">{player.username}</p>
               ))}
           </div>
