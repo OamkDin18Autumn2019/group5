@@ -35,25 +35,27 @@ const ListTeams = props => {
   console.log(teamStore.teams);
 
   return (
-    <Section>
-      <Table>
-        <tbody>
-          <tr>
-            <TableData>Teams</TableData>
-          </tr>
-          {teamStore.teams.map(team => (
+    gamesStore.selectedGameId && (
+      <Section>
+        <Table>
+          <tbody>
             <tr>
-              <Link to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}>
-                <TableData>{team.name}</TableData>
-                <TableData>
-                  Recruiting: {team.recruiting ? 'Yes' : 'No'}
-                </TableData>
-              </Link>
+              <TableData>Teams</TableData>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Section>
+            {teamStore.teams.map(team => (
+              <tr>
+                <Link to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}>
+                  <TableData>{team.name}</TableData>
+                  <TableData>
+                    Recruiting: {team.recruiting ? 'Yes' : 'No'}
+                  </TableData>
+                </Link>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Section>
+    )
   );
 };
 
