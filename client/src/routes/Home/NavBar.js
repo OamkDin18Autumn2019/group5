@@ -58,7 +58,7 @@ export const NavBarLink = styled(Link)`
 `;
 
 const NavBar = props => {
-  const { appStore } = props.rootStore;
+  const { appStore, authStore } = props.rootStore;
 
   return (
     <>
@@ -66,6 +66,7 @@ const NavBar = props => {
         <StyledNavBar>
           <Title>Global E-sports</Title>
           <NavBarLink to="/create-team">Create Team</NavBarLink>
+          <NavBarLink onClick={() => authStore.logout()}>Logout</NavBarLink>
         </StyledNavBar>
       ) : (
         <StyledNavBar>
