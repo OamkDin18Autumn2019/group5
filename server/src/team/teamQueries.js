@@ -16,21 +16,39 @@ const insertTeam = (knex, { name, gameId, captainId }) =>
   knex.insert({ name, gameId, captainId }).into('team');
 
 const getTeamRoster = (knex, { teamId, playerId }) => {
-  const subQuery = knex
-    .column('playerId')
-    .select()
-    .from('team_roster')
-    .where({ teamId });
+  const query = knex.raw(
+    `
+    SELECT
+      player.id,
+      player.username,
+      player.email
+    FROM player
+    LEFT JOIN team_roster
+      ON team_roster.playerId = player.id
+    ${
+      playerId
+        ? 'WHERE team_roster.playerId = :playerId AND team_roster.teamId = :teamId;'
+        : 'WHERE team_roster.teamId = :teamId;'
+    }
+      
+  `,
+    { playerId, teamId }
+  );
+  // const subQuery = knex
+  //   .column('playerId')
+  //   .select()
+  //   .from('team_roster')
+  //   .where({ teamId });
 
-  if (playerId) {
-    subQuery.where({ playerId }).first();
-  }
+  // if (playerId) {
+  //   subQuery.where({ playerId }).first();
+  // }
 
-  const query = knex
-    .column(['id', 'username', 'email'])
-    .select()
-    .from('player')
-    .whereIn('id', subQuery);
+  // const query = knex
+  //   .column(['id', 'username', 'email'])
+  //   .select()
+  //   .from('player')
+  //   .whereIn('id', subQuery);
 
   return query;
 };

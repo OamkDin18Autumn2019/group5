@@ -110,6 +110,40 @@ class TeamStore {
     }
   }
 
+  @action async invitePlayer(username, teamId) {
+    if (username && teamId) {
+      try {
+        const res = await fetch('http://localhost:8080/api/v1/invitations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.rootStore.appStore.accessToken}`
+          },
+          body: JSON.stringify({
+            username,
+            teamId
+          })
+        });
+        if (res) {
+          const resolved = await res.json();
+          console.log(resolved);
+          if (res.ok) {
+            this.rootStore.alertStore.initMessage(
+              'Player has been invited! :)'
+            );
+          } else if (resolved.error.errors) {
+            throw new Error(Object.values(resolved.error.errors)[0]);
+          } else if (resolved.error.message) {
+            throw new Error(resolved.error.message);
+          }
+        }
+      } catch (e) {
+        console.error(e);
+        this.rootStore.alertStore.initError(e.message);
+      }
+    }
+  }
+
   @computed get selectedTeam() {
     const team = this.teams.find(team => team.id === this.selectedTeamId);
     return team;

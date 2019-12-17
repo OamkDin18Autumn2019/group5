@@ -12,10 +12,10 @@ const invitePlayerToTeam = async (knex, { username, teamId }) => {
     throw error;
   }
 
-  const playerIsInTeam = await teamQueries.getTeamRoster(knex, {
+  const playerIsInTeam = (await teamQueries.getTeamRoster(knex, {
     teamId,
     playerId: playerData.id
-  });
+  }))[0][0];
 
   if (playerIsInTeam) {
     const error = new Error(`${username} is already in the team.`);

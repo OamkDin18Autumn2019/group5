@@ -17,7 +17,9 @@ const getTeam = async (knex, { id }) => {
     throw new Error('Team does not exist');
   }
 
-  const playersData = await teamQueries.getTeamRoster(knex, { teamId: id });
+  const playersData = (await teamQueries.getTeamRoster(knex, {
+    teamId: id
+  }))[0];
 
   const players = playersData.map(playerData => new Player(playerData));
 
