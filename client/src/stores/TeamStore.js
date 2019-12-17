@@ -14,7 +14,7 @@ class TeamStore {
 
   @action async registerTeam(name, gameId) {
     const { appStore } = this.rootStore;
-    if ((name, gameId)) {
+    if (name && gameId) {
       try {
         const res = await fetch('http://localhost:8080/api/v1/teams', {
           method: 'POST',
