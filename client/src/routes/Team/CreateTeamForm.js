@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 import { Link, useParams, Redirect } from 'react-router-dom';
@@ -67,11 +67,15 @@ const SubmitButton = styled.button`
   }
 `;
 
-const CreateTeamForm = props => {
-  const { appStore, teamStore } = props.rootStore;
+const CreateTeamForm = observer(props => {
+  const { appStore, teamStore, gamesStore } = props.rootStore;
 
   const [name, setName] = useState('');
-  const [gameId, setGameId] = useState('1');
+  const [gameId, setGameId] = useState(1);
+
+  useEffect(() => {
+    gamesStore.selectGame(Number(gameId));
+  }, [gameId]);
 
   const changeName = e => {
     setName(e.target.value);
@@ -87,7 +91,6 @@ const CreateTeamForm = props => {
   const registerTeam = async () => {
     await teamStore.registerTeam(name, gameId);
     setName('');
-    setGameId('');
   };
 
   return !teamStore.selectedTeamId ? (
@@ -111,9 +114,13 @@ const CreateTeamForm = props => {
       </Select>
       <SubmitButton onClick={registerTeam}>Create</SubmitButton>
     </>
+  ) : gamesStore.selectedGame ? (
+    <Redirect
+      to={`${gamesStore.selectedGame.name}/teams/${teamStore.selectedTeamId}`}
+    />
   ) : (
-    <Redirect to={`team-page/${teamStore.selectedTeamId}`} />
+    ''
   );
-};
+});
 
-export default inject('rootStore')(observer(CreateTeamForm));
+export default inject('rootStore')(CreateTeamForm);
