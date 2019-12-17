@@ -1,13 +1,18 @@
-import { decorate, action, observable } from 'mobx';
+import { decorate, action, observable, computed } from 'mobx';
 
 class TeamStore {
   @observable teams = [];
+  @observable selectedTeamId = null;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
 
-  async registerTeam(name, gameId) {
+  @action selectTeam(id) {
+    this.selectedTeamId = Number(id);
+  }
+
+  @action async registerTeam(name, gameId) {
     const { appStore } = this.rootStore;
     if ((name, gameId)) {
       try {
@@ -26,7 +31,6 @@ class TeamStore {
         if (res) {
           const resolved = await res.json();
           if (resolved.error) {
-            console.log(resolved.error);
             throw new Error(resolved.error.message);
           }
           if (res.ok) {
@@ -40,7 +44,7 @@ class TeamStore {
     }
   }
 
-  async getTeamsDataByGameId() {
+  @action async getTeamsDataByGameId() {
     const { appStore } = this.rootStore;
     try {
       const res = await fetch(
@@ -58,7 +62,6 @@ class TeamStore {
         const resolved = await res.json();
         if (resolved.data) {
           this.teams = resolved.data.teams;
-          console.log(this.teams);
         } else if (resolved.error.message) {
           throw new Error('Something went wrong!');
         }
@@ -69,7 +72,7 @@ class TeamStore {
     }
   }
 
-  async getTeamById(id) {
+  @action async getTeamById(id) {
     const { appStore } = this.rootStore;
     if (id) {
       try {
@@ -83,7 +86,6 @@ class TeamStore {
 
         if (res) {
           const resolved = await res.json();
-          console.log(resolved);
 
           if (resolved.error) {
             throw new Error(resolved.error.message);
@@ -106,12 +108,11 @@ class TeamStore {
       }
     }
   }
-}
 
-decorate(TeamStore, {
-  registerTeam: action.bound,
-  getTeamsDataByGameId: action.bound,
-  getTeamById: action.bound
-});
+  @computed get selectedTeam() {
+    const team = this.teams.find(team => team.id === this.selectedTeamId);
+    return team;
+  }
+}
 
 export default TeamStore;

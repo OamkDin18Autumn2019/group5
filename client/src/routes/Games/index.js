@@ -20,7 +20,6 @@ const Games = props => {
   `;
 
   useEffect(() => {
-    console.log(props);
     if (!gamesStore.selectedGame) {
       const game = gamesStore.games.find(
         game => game.name === props.location.pathname.substr(1)

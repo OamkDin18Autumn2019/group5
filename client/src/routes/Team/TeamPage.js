@@ -49,26 +49,31 @@ const TeamPage = props => {
   const id = props.match.params.id;
 
   useEffect(() => {
-    teamStore.getTeamById(id);
-  }, [appStore.initialized]);
+    if (appStore.initialized) {
+      teamStore.getTeamById(id);
+      teamStore.selectTeam(id);
+    }
+  }, [appStore.initialized, teamStore.selectedTeamId]);
 
   return (
-    <Background>
-      <MainStyle>
-        <Container>
-          <Title>Team page</Title>
-          <p>TEAM NAME: {teamStore.teams.name}</p>
-          <p>TEAM ID:{teamStore.teams.id}</p>
-          <div>
-            PLAYERS:{' '}
-            {teamStore.teams.players &&
-              teamStore.teams.players.map(player => (
-                <p key="players">{player.username}</p>
-              ))}
-          </div>
-        </Container>
-      </MainStyle>
-    </Background>
+    teamStore.selectedTeam && (
+      <Background>
+        <MainStyle>
+          <Container>
+            <Title>Team page</Title>
+            <p>TEAM NAME: {teamStore.selectedTeam.name}</p>
+            <p>TEAM ID:{teamStore.selectedTeam.id}</p>
+            <div>
+              PLAYERS:{' '}
+              {teamStore.selectedTeam.players &&
+                teamStore.selectedTeam.players.map(player => (
+                  <p key="players">{player.username}</p>
+                ))}
+            </div>
+          </Container>
+        </MainStyle>
+      </Background>
+    )
   );
 };
 
