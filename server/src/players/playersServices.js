@@ -2,9 +2,13 @@ const teamServices = require('../team/teamServices');
 const invitationsServices = require('../invitations/invitationsServices');
 
 const getUserInformation = async (knex, user) => {
-  const teams = await teamServices.getTeams(knex, { playerId: user.id });
-  const invitations = await invitationsServices.getInvitations(knex, user.id);
-  return { user, teams, invitations };
+  const userInformation = await knex.transaction(async trx => {
+    const teams = await teamServices.getTeams(trx, { playerId: user.id });
+    const invitations = await invitationsServices.getInvitations(trx, user.id);
+
+    return { user, teams, invitations };
+  });
+  return userInformation;
 };
 
 module.exports = { getUserInformation };
