@@ -20,6 +20,7 @@ const Title = styled.h1`
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
     2px 2px 0 #000;
   text-align: center;
+  color: #fff;
   display: inline-block !important;
   align-items: center;
 `;

@@ -9,7 +9,7 @@ const StyledGameList = styled.div`
 `;
 
 const GameList = props => {
-  const { appStore } = props.rootStore;
+  const { gamesStore } = props.rootStore;
 
   return (
     <StyledGameList>
@@ -19,13 +19,15 @@ const GameList = props => {
           'https://cdn.faceit.com/games/landing-page/game-boxes/csgo-background.jpg'
         }
         title={'CS: GO'}
+        onClick={() => gamesStore.selectGame(1)}
       />
       <GameButton
-        link={'/dota2'}
+        link={'/dota-2'}
         logo={
           'https://cdn.faceit.com/games/landing-page/game-boxes/dota-background.jpg'
         }
         title={'DOTA 2'}
+        onClick={() => gamesStore.selectGame(2)}
       />
       <GameButton
         link={'/league-of-legends'}
@@ -33,6 +35,7 @@ const GameList = props => {
           'https://cdn.faceit.com/games/landing-page/game-background/lol.jpg'
         }
         title={'League of Legends'}
+        onClick={() => gamesStore.selectGame(3)}
       />
     </StyledGameList>
   );
