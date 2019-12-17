@@ -8,11 +8,15 @@ class TeamStore {
   }
 
   async registerTeam(name, gameId) {
+    const { appStore } = this.rootStore;
     if ((name, gameId)) {
       try {
         const res = await fetch('http://localhost:8080/api/v1/teams', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${appStore.accessToken}`
+          },
           body: JSON.stringify({
             name,
             gameId
@@ -25,7 +29,10 @@ class TeamStore {
             console.log(resolved.error);
             throw new Error(resolved.error.message);
           }
-          console.log(resolved.data.team); // log data from response
+          if (res.ok) {
+            this.setTeamData(resolved.data.team);
+            this.setRedirect(true);
+          }
         }
       } catch (e) {
         console.error(e);
@@ -34,7 +41,7 @@ class TeamStore {
     }
   }
 
-  async getTeamDataById() {
+  async getTeamsDataByGameId() {
     try {
       const res = await fetch(
         `http://localhost:8080/api/v1/teams?gameId=${this.rootStore.gamesStore.selectedGameId}`,
@@ -55,7 +62,43 @@ class TeamStore {
       }
     } catch (e) {
       console.error(e);
-      if (e) {
+      this.rootStore.alertStore.initError(e.message);
+    }
+  }
+
+  async getTeamById(id) {
+    const { appStore } = this.rootStore;
+    if (id) {
+      try {
+        const res = await fetch(`http://localhost:8080/api/v1/teams/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${appStore.accessToken}`
+          }
+        });
+
+        if (res) {
+          const resolved = await res.json();
+          console.log(resolved);
+
+          if (resolved.error) {
+            throw new Error(resolved.error.message);
+          }
+          if (res.ok) {
+            const index = this.teams.findIndex(
+              team => team.id === resolved.data.team.id
+            );
+
+            if (index !== -1) {
+              this.teams.splice(index, 1, resolved.data.team);
+            } else {
+              this.teams.push(resolved.data.team);
+            }
+          }
+        }
+      } catch (e) {
+        console.error(e);
         this.rootStore.alertStore.initError(e.message);
       }
     }
@@ -64,7 +107,8 @@ class TeamStore {
 
 decorate(TeamStore, {
   registerTeam: action.bound,
-  getTeamDataById: action.bound
+  getTeamsDataByGameId: action.bound,
+  getTeamById: action.bound
 });
 
 export default TeamStore;

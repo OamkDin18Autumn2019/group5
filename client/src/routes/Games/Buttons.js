@@ -40,7 +40,7 @@ const Buttons = props => {
   `;
 
   const getTeamData = async () => {
-    await teamStore.getTeamDataById();
+    await teamStore.getTeamsDataByGameId();
   };
 
   return (
