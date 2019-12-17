@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 
 const ListTeams = props => {
-  const { appStore, teamStore } = props.rootStore;
+  const { appStore, teamStore, gamesStore } = props.rootStore;
+
+  useEffect(() => {
+    if (appStore.initialized) {
+      const gameSlug = props.location.pathname.split('/')[1];
+
+      if (!gamesStore.selectedGame) {
+        const game = gamesStore.games.find(game => game.name === gameSlug);
+        gamesStore.selectGame(game.id);
+        teamStore.getTeamsDataByGameId();
+      }
+    }
+  }, [appStore.initialized]);
 
   const Section = styled.div`
     width: 100%;
