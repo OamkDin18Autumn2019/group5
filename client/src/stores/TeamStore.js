@@ -35,6 +35,7 @@ class TeamStore {
           }
           if (res.ok) {
             this.teams.push(resolved.data.team);
+            this.selectTeam(resolved.data.team.id);
           }
         }
       } catch (e) {

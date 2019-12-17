@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, Redirect } from 'react-router-dom';
 
 const Input = styled.input`
   display: block;
@@ -90,7 +90,7 @@ const CreateTeamForm = props => {
     setGameId('');
   };
 
-  return (
+  return !teamStore.selectedTeamId ? (
     <>
       <Input
         type="text"
@@ -111,6 +111,8 @@ const CreateTeamForm = props => {
       </Select>
       <SubmitButton onClick={registerTeam}>Create</SubmitButton>
     </>
+  ) : (
+    <Redirect to={`team-page/${teamStore.selectedTeamId}`} />
   );
 };
 

@@ -53,6 +53,8 @@ const TeamPage = props => {
       teamStore.getTeamById(id);
       teamStore.selectTeam(id);
     }
+
+    return () => teamStore.selectTeam(null);
   }, [appStore.initialized, teamStore.selectedTeamId]);
 
   return (
