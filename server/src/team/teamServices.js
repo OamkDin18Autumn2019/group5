@@ -37,7 +37,7 @@ const getTeam = async (knex, { id }, userId) => {
     players
   });
 
-  return { team };
+  return team;
 };
 
 const registerTeam = async (knex, { name, gameId, captainId }) => {
