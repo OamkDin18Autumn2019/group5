@@ -3,9 +3,23 @@ import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Table = styled.table``;
+const Table = styled.table`
+  // border: 1px solid white;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+`;
 
-const TableData = styled.td``;
+const TableRow = styled.tr``;
+
+const TableData = styled.td`
+  color: #fff;
+  width: 35%;
+  height: 50px;
+  vertical-align: top;
+  padding: 5px;
+`;
 
 const FeaturedTournaments = props => {
   const { appStore, gamesStore } = props.rootStore;
@@ -13,24 +27,30 @@ const FeaturedTournaments = props => {
   return (
     <Table>
       <tbody>
-        <tr>
+        <TableRow>
           <TableData>Featured Tournaments</TableData>
-        </tr>
+        </TableRow>
         {/* {list.map(tournament => (
-          <tr>
+          <TableRow>
             <TableData>{}</TableData>
             <TableData>{}</TableData>
             <TableData>{}</TableData>
             <TableData>{}</TableData>
-          </tr>
+          </TableRow>
         ))} */}
 
-        <tr>
+        <TableRow>
           <TableData>Starts in</TableData>
           <TableData>testiturnaus</TableData>
           <TableData>Peli</TableData>
           <TableData>0/64</TableData>
-        </tr>
+        </TableRow>
+        <TableRow>
+          <TableData>Starts in</TableData>
+          <TableData>testiturnaus</TableData>
+          <TableData>Peli</TableData>
+          <TableData>0/64</TableData>
+        </TableRow>
       </tbody>
     </Table>
   );
