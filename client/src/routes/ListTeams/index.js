@@ -43,7 +43,7 @@ const ListTeams = props => {
           </tr>
           {teamStore.teams.map(team => (
             <tr>
-              <Link to={`/${gamesStore.games.name}/teams/${team.id}`}>
+              <Link to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}>
                 <TableData>{team.name}</TableData>
                 <TableData>
                   Recruiting: {team.recruiting ? 'Yes' : 'No'}
