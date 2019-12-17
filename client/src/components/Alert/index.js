@@ -16,7 +16,7 @@ const StyledAlert = styled.div`
 `;
 
 const AlertText = styled.div`
-  font-family: Arial;
+  font-family: Roboto, sans-serif;
   color: #fff;
 `;
 
