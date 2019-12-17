@@ -42,9 +42,11 @@ const App = observer(props => {
         <Route exact path="/register" component={Auth} />
         <Route exact path="/login" component={Auth} />
         <Route exact path="/create-team" component={Team} />
-        <Route exact path="/team-page/:id" component={TeamPage} />
         {gamesStore.games.map(game => (
-          <Route path={`/${game.name}/teams`} component={ListTeams} />
+          <Route exact path={`/${game.name}/teams`} component={ListTeams} />
+        ))}
+        {gamesStore.games.map(game => (
+          <Route path={`/${game.name}/teams/:id`} component={TeamPage} />
         ))}
       </Switch>
     </BrowserRouter>
