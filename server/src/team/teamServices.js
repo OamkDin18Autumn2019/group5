@@ -2,10 +2,16 @@ const Team = require('./Team');
 const Player = require('../players/Player');
 const teamQueries = require('./teamQueries');
 
-const getTeams = async (knex, { gameId }) => {
-  const teamsData = await teamQueries.getTeamsByGame(knex, gameId);
+const getTeams = async (knex, { playerId, gameId }) => {
+  const teamsData = playerId
+    ? await teamQueries.getTeamsByPlayerId(knex, playerId)
+    : await teamQueries.getTeamsByGame(knex, gameId);
 
-  const teams = teamsData.map(teamData => new Team(teamData));
+  const teams = teamsData.map(teamData => {
+    const userIsCaptain = teamData.captainId === playerId;
+
+    return new Team({ ...teamData, canInvitePlayers: userIsCaptain });
+  });
 
   return teams;
 };
