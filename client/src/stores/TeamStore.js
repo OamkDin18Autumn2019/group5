@@ -127,11 +127,14 @@ class TeamStore {
         if (res) {
           const resolved = await res.json();
           console.log(resolved);
-          if (resolved.error) {
-            throw new Error(resolved.error.message);
-          }
           if (res.ok) {
-            this.rootStore.alertStore.initMessage('Player has been invited :)');
+            this.rootStore.alertStore.initMessage(
+              'Player has been invited! :)'
+            );
+          } else if (resolved.error.errors) {
+            throw new Error(Object.values(resolved.error.errors)[0]);
+          } else if (resolved.error.message) {
+            throw new Error(resolved.error.message);
           }
         }
       } catch (e) {
