@@ -8,20 +8,20 @@ import Alert from './components/Alert';
 import ListTeams from './routes/ListTeams';
 import Games from './routes/Games';
 import TeamPage from './routes/Team/TeamPage';
+import { BrowserRouter } from 'react-router-dom';
 
 const App = observer(props => {
-  const { alertStore, appStore } = props.rootStore;
+  const { alertStore, appStore, gamesStore } = props.rootStore;
 
   useEffect(() => {
     if (!appStore.initialized) appStore.init();
   }, [appStore.initialized]);
 
   return (
-    <>
+    <BrowserRouter>
       {alertStore.isOpen && <Alert rootStore={props.rootStore} />}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/teams-page" component={ListTeams} />
         <Route
           exact
           path="/counter-strike-global-offensive"
@@ -43,8 +43,11 @@ const App = observer(props => {
         <Route exact path="/login" component={Auth} />
         <Route exact path="/create-team" component={Team} />
         <Route exact path="/team-page/:id" component={TeamPage} />
+        {gamesStore.games.map(game => (
+          <Route path={`/${game.name}/teams-page`} component={ListTeams} />
+        ))}
       </Switch>
-    </>
+    </BrowserRouter>
   );
 });
 
