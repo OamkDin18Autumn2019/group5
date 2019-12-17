@@ -6,7 +6,7 @@ const passport = require('../config/passport/passport');
 
 const teamRouter = new Router();
 
-// teamRouter.use(passport.authenticate('jwt', { session: false }));
+teamRouter.use(passport.authenticate('jwt', { session: false }));
 
 const getTeams = async (req, res, next) => {
   const { knex, getTeamsData } = req.context;

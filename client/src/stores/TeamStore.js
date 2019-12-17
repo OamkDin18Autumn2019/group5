@@ -30,8 +30,7 @@ class TeamStore {
             throw new Error(resolved.error.message);
           }
           if (res.ok) {
-            this.setTeamData(resolved.data.team);
-            this.setRedirect(true);
+            this.teams.push(resolved.data.team);
           }
         }
       } catch (e) {
@@ -47,15 +46,18 @@ class TeamStore {
         `http://localhost:8080/api/v1/teams?gameId=${this.rootStore.gamesStore.selectedGameId}`,
         {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.rootStore.appStore.accessToken}`
+          }
         }
       );
 
       if (res) {
         const resolved = await res.json();
-        console.log(resolved);
         if (resolved.data) {
           this.teams = resolved.data.teams;
+          console.log(this.teams);
         } else if (resolved.error.message) {
           throw new Error('Something went wrong!');
         }

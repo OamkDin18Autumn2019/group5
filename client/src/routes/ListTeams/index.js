@@ -31,8 +31,9 @@ const ListTeams = props => {
           {teamStore.teams.map(teams => (
             <tr>
               <TableData>{teams.name}</TableData>
-              <TableData>Recruiting: </TableData>
-              <TableData>{teams.recruiting}</TableData>
+              <TableData>
+                Recruiting: {teams.recruiting ? 'Yes' : 'No'}
+              </TableData>
             </tr>
           ))}
         </tbody>
