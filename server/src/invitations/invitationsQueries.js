@@ -14,10 +14,10 @@ const getInvitationsByPlayerAndTeam = (knex, { playerId, teamId, state }) => {
       { teamName: 'team.name' },
       { captainName: 'player.username' }
     )
-    .where({ playerId })
     .leftJoin('team', 'request.teamId', 'team.id')
     .leftJoin('game', 'game.id', 'team.gameId')
-    .leftJoin('player', 'request.playerId', 'player.id');
+    .leftJoin('player', 'team.captainId', 'player.id')
+    .where({ playerId });
 
   if (teamId) {
     query.where({ teamId });
