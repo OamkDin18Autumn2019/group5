@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
+import AddMemberBtn from './AddMemberBtn';
 
 const Background = styled.div`
   width: 100%;
@@ -15,32 +16,39 @@ const Background = styled.div`
   font-family: Roboto, sans-serif;
 `;
 
-const MainStyle = styled.div`
-  position: relative;
-  margin: 15% auto;
-  display: flex;
-  width: 300px;
-  height: 330px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 10px rgb(0, 0, 0);
-`;
-
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  padding: 40px;
-  width: 300px;
-  height: 300px;
-`;
-
 const Title = styled.h1`
   margin: 10px 0 20px 0;
   font-weight: 300;
   font-size: 28px;
-  color: #20242e;
+  color: #fff;
+  text-align: left;
+  margin-bottom: 40px;
+`;
+
+const SubTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 15px 0;
+  font-weight: 200;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5%;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+`;
+
+const MemberData = styled.div`
+  color: #fff;
+  height: 15px;
+  border-bottom: 1px solid;
+  padding: 10px;
 `;
 
 const TeamPage = props => {
@@ -60,20 +68,20 @@ const TeamPage = props => {
   return (
     teamStore.selectedTeam && (
       <Background>
-        <MainStyle>
-          <Container>
-            <Title>Team page</Title>
-            <p>TEAM NAME: {teamStore.selectedTeam.name}</p>
-            <p>TEAM ID:{teamStore.selectedTeam.id}</p>
-            <div>
-              PLAYERS:{' '}
+        <Container>
+          <tbody>
+            <Title>{teamStore.selectedTeam.name}</Title>
+            <SubTitle>
+              Team Members <AddMemberBtn></AddMemberBtn>
+            </SubTitle>
+            <>
               {teamStore.selectedTeam.players &&
                 teamStore.selectedTeam.players.map(player => (
-                  <p key="players">{player.username}</p>
+                  <MemberData key="players">{player.username}</MemberData>
                 ))}
-            </div>
-          </Container>
-        </MainStyle>
+            </>
+          </tbody>
+        </Container>
       </Background>
     )
   );

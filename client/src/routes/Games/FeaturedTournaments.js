@@ -9,6 +9,8 @@ const Table = styled.table`
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
 `;
 
 const TableRow = styled.tr``;
