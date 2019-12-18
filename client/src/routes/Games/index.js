@@ -5,19 +5,19 @@ import NavBar from './NavBar';
 import Buttons from './Buttons';
 import FeaturedTournaments from './FeaturedTournaments';
 
+const Section = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #20242e;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+`;
+
 const Games = props => {
   const { gamesStore, appStore } = props.rootStore;
-
-  const Section = styled.div`
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: #20242e;
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-  `;
 
   useEffect(() => {
     if (!gamesStore.selectedGame) {
@@ -30,10 +30,15 @@ const Games = props => {
 
   return (
     <>
-      {gamesStore.selectedGame && (
+      {gamesStore.selectedGame && appStore.authenticated ? (
         <Section>
           <NavBar />
           <Buttons />
+          <FeaturedTournaments />
+        </Section>
+      ) : (
+        <Section>
+          <NavBar />
           <FeaturedTournaments />
         </Section>
       )}
