@@ -79,7 +79,6 @@ const PendingInvitations = props => {
     <>
       <Table>
         <SubTitle>Team invitations</SubTitle>
-
         {profileStore.pendingInvitations.map(invitation => (
           <tr>
             <StyledLink

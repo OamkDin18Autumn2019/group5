@@ -26,10 +26,6 @@ const Table = styled.table`
   padding-left: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
-  &:hover {
-    opacity: 0.5;
-    transition: 0.1s ease;
-  }
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
@@ -40,10 +36,15 @@ const Table = styled.table`
 const TeamData = styled.div`
   color: #fff;
   height: 15px;
+  font-size: 16px;
   border-bottom: 1px solid;
   padding: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  &:hover {
+    opacity: 0.5;
+    transition: 0.1s ease;
+  }
   @media (max-width: 700px) {
   }
 `;
@@ -71,15 +72,13 @@ const YourTeams = props => {
       <Table>
         <SubTitle>Your teams</SubTitle>
         {profileStore.teams.map(team => (
-          <div>
-            <StyledLink
-              to={`/${
-                gamesStore.games.find(game => game.id === team.gameId).name
-              }/teams/${team.id}`}
-            >
-              <TeamData>{team.name}</TeamData>
-            </StyledLink>
-          </div>
+          <StyledLink
+            to={`/${
+              gamesStore.games.find(game => game.id === team.gameId).name
+            }/teams/${team.id}`}
+          >
+            <TeamData>{team.name}</TeamData>
+          </StyledLink>
         ))}
       </Table>
     </>
