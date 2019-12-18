@@ -16,6 +16,27 @@ const Section = styled.div`
   font-family: Roboto, sans-serif;
 `;
 
+const MainTitle = styled.h1`
+  width: 100%;
+  heigth: 37px;
+  cursor: pointer;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
+  text-align: center;
+  color: #fff;
+  display: inline-block !important;
+  align-items: center;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+  }
+  @media (max-width: 700px) {
+    display: block;
+    width: 100%;
+    align-items: center;
+  }
+`;
+
 const Title = styled.h1`
   margin: 0;
   font-weight: 300;
@@ -124,6 +145,13 @@ const ListTeams = props => {
     <>
       {gamesStore.selectedGame && gamesStore.selectedGame.name ? (
         <Section>
+          <MainTitle
+            onClick={() => {
+              props.history.push('/');
+            }}
+          >
+            Global E-sports
+          </MainTitle>
           <Container>
             <Tbody>
               <Title>
