@@ -24,18 +24,19 @@ const seed = async knex => {
     }
   ];
 
-  const registerTasks = [...Array(100).keys()].map(number => {
-    return authServices.registerUser(knex, {
-      username: `player${number}`,
-      email: `player${number}@lmao.lol`,
-      password: '111111'
-    });
+  const registerTasks = [...Array(200).keys()].map(number => {
+    return knex =>
+      authServices.registerUser(knex, {
+        username: `player${number}`,
+        email: `player${number}@lmao.lol`,
+        password: '111111'
+      });
   });
 
   await knex.transaction(async trx => {
     await Promise.all([
       ...mainUsers.map(user => authServices.registerUser(trx, user)),
-      ...registerTasks
+      ...registerTasks.map(task => task(trx))
     ]);
   });
 };
