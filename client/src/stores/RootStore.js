@@ -3,6 +3,7 @@ import TeamStore from './TeamStore';
 import AuthStore from './AuthStore';
 import AlertStore from './AlertStore';
 import GamesStore from './GamesStore';
+import ProfileStore from './ProfileStore';
 
 class RootStore {
   constructor() {
@@ -11,6 +12,7 @@ class RootStore {
     this.authStore = new AuthStore(this);
     this.alertStore = new AlertStore(this);
     this.gamesStore = new GamesStore(this);
+    this.profileStore = new ProfileStore(this);
   }
 }
 

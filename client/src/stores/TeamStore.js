@@ -30,12 +30,13 @@ class TeamStore {
 
         if (res) {
           const resolved = await res.json();
-          if (resolved.error) {
-            throw new Error(resolved.error.message);
-          }
           if (res.ok) {
             this.teams.push(resolved.data.team);
             this.selectTeam(resolved.data.team.id);
+          } else if (resolved.error.errors) {
+            throw new Error(Object.values(resolved.error.errors)[0]);
+          } else if (resolved.error.message) {
+            throw new Error(resolved.error.message);
           }
         }
       } catch (e) {

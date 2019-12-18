@@ -67,12 +67,13 @@ const Button = styled.button`
   margin-top: 10px;
   width: 220px;
   height: 32px;
-  background: #636363;
+  background: #7de88c;
+  color: #20242e;
   border: none;
   border-radius: 2px;
-  color: #fff;
+  font-size: 16px !important;
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: 500 !important;
   text-transform: uppercase;
   transition: 0.1s ease;
   cursor: pointer;

@@ -5,12 +5,48 @@ import { Link } from 'react-router-dom';
 
 const Table = styled.table`
   // border: 1px solid white;
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   font-family: Roboto, sans-serif;
   font-size: 16px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  font-weight: 300;
+  font-size: 28px;
+  color: #fff;
+  text-align: left;
+  margin-bottom: 40px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  margin-top: 5px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+`;
+
+const Tbody = styled.div`
+  background: #32353d;
+  padding: 40px;
+  width: 35%;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    width: 80%;
+  }
 `;
 
 const TableRow = styled.tr``;
@@ -18,9 +54,15 @@ const TableRow = styled.tr``;
 const TableData = styled.td`
   color: #fff;
   width: 35%;
-  height: 50px;
+  height: 20px;
   vertical-align: top;
-  padding: 5px;
+  padding: 10px;
+  padding-bottom: 0;
+  border-bottom: solid 1px;
+  @media (max-width: 700px) {
+    font-size: 14px;
+    width: 100%;
+  }
 `;
 
 const FeaturedTournaments = props => {
@@ -28,32 +70,23 @@ const FeaturedTournaments = props => {
 
   return (
     <Table>
-      <tbody>
+      <Tbody>
         <TableRow>
-          <TableData>Featured Tournaments</TableData>
+          <Title>Featured Tournaments</Title>
         </TableRow>
-        {/* {list.map(tournament => (
-          <TableRow>
-            <TableData>{}</TableData>
-            <TableData>{}</TableData>
-            <TableData>{}</TableData>
-            <TableData>{}</TableData>
-          </TableRow>
-        ))} */}
-
         <TableRow>
-          <TableData>Starts in</TableData>
+          <TableData>Starts in: 1d 3h</TableData>
           <TableData>testiturnaus</TableData>
           <TableData>Peli</TableData>
-          <TableData>0/64</TableData>
+          <TableData>32/64</TableData>
         </TableRow>
         <TableRow>
-          <TableData>Starts in</TableData>
+          <TableData>Starts in: 7d 1h</TableData>
           <TableData>testiturnaus</TableData>
           <TableData>Peli</TableData>
-          <TableData>0/64</TableData>
+          <TableData>16/64</TableData>
         </TableRow>
-      </tbody>
+      </Tbody>
     </Table>
   );
 };

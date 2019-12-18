@@ -1,23 +1,45 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import NavBar from './NavBar';
+import GameNavBar from './GameNavBar';
 import Buttons from './Buttons';
 import FeaturedTournaments from './FeaturedTournaments';
 
+const Section = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #20242e;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-family: Robot, Sans-serif;
+`;
+
+const MainTitle = styled.h1`
+  width: 100%;
+  heigth: 37px;
+  cursor: pointer;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
+  text-align: center;
+  color: #fff;
+  display: inline-block !important;
+  align-items: center;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+  }
+  @media (max-width: 700px) {
+    display: block;
+    width: 100%;
+    align-items: center;
+  }
+`;
+
 const Games = props => {
   const { gamesStore, appStore } = props.rootStore;
-
-  const Section = styled.div`
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: #20242e;
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-  `;
 
   useEffect(() => {
     if (!gamesStore.selectedGame) {
@@ -30,10 +52,22 @@ const Games = props => {
 
   return (
     <>
-      {gamesStore.selectedGame && (
+      {gamesStore.selectedGame && appStore.authenticated ? (
         <Section>
-          <NavBar />
+          <MainTitle
+            onClick={() => {
+              props.history.push('/');
+            }}
+          >
+            Global E-sports
+          </MainTitle>
+          <GameNavBar />
           <Buttons />
+          <FeaturedTournaments />
+        </Section>
+      ) : (
+        <Section>
+          <GameNavBar />
           <FeaturedTournaments />
         </Section>
       )}

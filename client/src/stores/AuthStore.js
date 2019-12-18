@@ -66,6 +66,7 @@ class AuthStore {
 
   logout() {
     this.rootStore.appStore.reset();
+    this.rootStore.profileStore.reset();
   }
 }
 

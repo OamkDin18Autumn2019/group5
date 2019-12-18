@@ -5,6 +5,27 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 650px;
   font-family: 'Roboto', sans-serif;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 410px;
+    height: auto;
+    align-items: center;
+  }
+`;
+
+const EmptyDiv = styled.div`
+  margin-left: 650px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 130px;
+    margin-left: 110px;
+    height: auto;
+    align-items: center;
+  }
 `;
 
 const Input = styled.input`
@@ -26,6 +47,15 @@ const Input = styled.input`
     color: #20242e;
     transition: 0.2s ease;
     outline: none;
+  }
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 130px;
+    margin-left: 110px;
+    height: auto;
+    align-items: center;
   }
 `;
 
@@ -59,6 +89,15 @@ const AddButton = styled.button`
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
   }
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 130px;
+    margin-left: 110px;
+    height: 25px;
+    align-items: center;
+  }
 `;
 
 const AddMemberBtn = props => {
@@ -79,15 +118,21 @@ const AddMemberBtn = props => {
   };
 
   return (
-    <Container>
-      <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
-      <Input
-        type="text"
-        value={username}
-        onChange={changeUsername}
-        placeholder="Search for players"
-      />
-    </Container>
+    <>
+      {teamStore.selectedTeam.canInvitePlayers ? (
+        <Container>
+          <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
+          <Input
+            type="text"
+            value={username}
+            onChange={changeUsername}
+            placeholder="Search for players"
+          />
+        </Container>
+      ) : (
+        <EmptyDiv></EmptyDiv>
+      )}
+    </>
   );
 };
 

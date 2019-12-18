@@ -47,10 +47,6 @@ const Title = styled.h1`
 const Team = props => {
   const { teamStore } = props.rootStore;
 
-  if (teamStore.redirect) {
-    return <Redirect to={`team-page/${teamStore.teamData.id}`} />;
-  }
-
   return (
     <>
       {props.location.pathname === '/create-team' ? (
@@ -63,15 +59,7 @@ const Team = props => {
           </MainStyle>
         </Background>
       ) : (
-        <Background>
-          <MainStyle>
-            <Container>
-              <Title>Team page</Title>
-              <h1>NAME: {teamStore.teamData.name}</h1>
-              <h1>TEAM ID:{teamStore.teamData.id}</h1>
-            </Container>
-          </MainStyle>
-        </Background>
+        ''
       )}
     </>
   );

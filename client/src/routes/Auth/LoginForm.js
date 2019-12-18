@@ -53,7 +53,7 @@ const Input = styled.input`
   border-bottom: 1px solid #20242e;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   transition: 0.2s ease;
   &:focus {
     border-bottom: 2px solid #636363;
@@ -67,12 +67,13 @@ const Button = styled.button`
   margin-top: 10px;
   width: 220px;
   height: 32px;
-  background: #636363;
+  background: #7de88c;
   border: none;
   border-radius: 2px;
-  color: #fff;
+  color: #20242e;
+  font-size: 16px !important;
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: 500 !important;
   text-transform: uppercase;
   transition: 0.1s ease;
   cursor: pointer;
