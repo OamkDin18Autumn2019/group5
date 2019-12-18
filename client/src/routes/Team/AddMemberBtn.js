@@ -54,6 +54,7 @@ const Input = styled.input`
     justify-content: center;
     width: 130px;
     margin-left: 110px;
+    font-size: 14px;
     height: auto;
     align-items: center;
   }
@@ -93,6 +94,7 @@ const AddButton = styled.button`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 14px;
     width: 130px;
     margin-left: 110px;
     height: 25px;

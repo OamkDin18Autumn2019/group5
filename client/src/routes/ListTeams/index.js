@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 
 const Section = styled.div`
   width: 100%;
-  height: 100%;
-  position: relative;
+  // height: 100%;
   background: #20242e;
+  position: sticky;
   background-size: cover;
   background-position: top center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+  // height: 100vh;
+  overflow: auto:
   font-family: Roboto, sans-serif;
 `;
 
@@ -23,6 +25,7 @@ const Title = styled.h1`
   margin-bottom: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  font-family: Roboto, sans-serif;
   margin-top: 20px;
   @media (max-width: 700px) {
     display: flex;
@@ -47,6 +50,7 @@ const Tbody = styled.div`
   background: #32353d;
   margin-top: 10px;
   padding: 40px;
+  margin-bottom: 30px;
   @media (max-width: 700px) {
     display: flex;
     font-size: 14px;

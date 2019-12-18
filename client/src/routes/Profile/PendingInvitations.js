@@ -60,12 +60,26 @@ const PendingInvitations = props => {
     margin-bottom: 0;
   `;
 
+  const SubTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 15px 0;
+  font-weight: 200;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  @media (max-width: 700px) {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size 18px;
+  }
+`;
+
   return (
-    <div>
+    <>
       <Table>
-        <tr>
-          <th>Team invitations</th>
-        </tr>
+        <SubTitle>Team invitations</SubTitle>
+
         {profileStore.pendingInvitations.map(invitation => (
           <tr>
             <StyledLink
@@ -99,7 +113,7 @@ const PendingInvitations = props => {
           </tr>
         ))}
       </Table>
-    </div>
+    </>
   );
 };
 
