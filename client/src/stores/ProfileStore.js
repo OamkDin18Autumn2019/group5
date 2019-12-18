@@ -17,7 +17,7 @@ class ProfileStore {
     this.initialized = false;
   }
 
-  @action async GetProfileData() {
+  @action async getProfileData() {
     try {
       const res = await fetch(`http://localhost:8080/api/v1/user`, {
         method: 'GET',

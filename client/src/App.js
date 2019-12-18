@@ -17,7 +17,7 @@ const App = observer(props => {
   useEffect(() => {
     if (!appStore.initialized) appStore.init();
     if (appStore.accessToken && !profileStore.initialized) {
-      profileStore.GetProfileData();
+      profileStore.getProfileData();
     }
   }, [appStore.initialized, profileStore.invitations, appStore.accessToken]);
 
