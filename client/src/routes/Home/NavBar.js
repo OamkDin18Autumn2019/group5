@@ -110,13 +110,7 @@ const NavBar = props => {
     <>
       {appStore.accessToken ? (
         <StyledNavBar>
-          <Title
-            onClick={() => {
-              props.history.push('/');
-            }}
-          >
-            Global E-sports
-          </Title>
+          <Title>Global E-sports</Title>
           <StyledLink
             to="/profile-page"
             onClick={() => profileStore.getProfileData()}
