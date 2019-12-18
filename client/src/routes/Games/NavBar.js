@@ -51,21 +51,27 @@ const NavBar = props => {
   const { appStore, gamesStore } = props.rootStore;
 
   return (
-    <StyledNavBar>
-      <Link to={gamesStore.selectedGame.name}>
-        <Logo src={gamesStore.selectedGame.logo} />
-      </Link>
-      <StyledLink to="/profile-page">
-        <Profile>
-          JyrGi{' '}
-          <ProfileLogo
-            src={
-              'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
-            }
-          />{' '}
-        </Profile>
-      </StyledLink>
-    </StyledNavBar>
+    <>
+      {gamesStore.selectedGame && gamesStore.selectedGame.name ? (
+        <StyledNavBar>
+          <Link to={gamesStore.selectedGame.name}>
+            <Logo src={gamesStore.selectedGame.logo} />
+          </Link>
+          <StyledLink to="/profile-page">
+            <Profile>
+              JyrGi{' '}
+              <ProfileLogo
+                src={
+                  'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
+                }
+              />{' '}
+            </Profile>
+          </StyledLink>
+        </StyledNavBar>
+      ) : (
+        ''
+      )}
+    </>
   );
 };
 
