@@ -39,7 +39,7 @@ const Title = styled.h1`
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     margin-bottom: 10px;
     font-size 24px;
   }
