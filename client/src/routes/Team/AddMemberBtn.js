@@ -7,6 +7,10 @@ const Container = styled.div`
   font-family: 'Roboto', sans-serif;
 `;
 
+const EmptyDiv = styled.div`
+  margin-left: 650px;
+`;
+
 const Input = styled.input`
   display: block;
   box-sizing: border-box;
@@ -79,15 +83,21 @@ const AddMemberBtn = props => {
   };
 
   return (
-    <Container>
-      <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
-      <Input
-        type="text"
-        value={username}
-        onChange={changeUsername}
-        placeholder="Search for players"
-      />
-    </Container>
+    <>
+      {teamStore.selectedTeam.canInvitePlayers ? (
+        <Container>
+          <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
+          <Input
+            type="text"
+            value={username}
+            onChange={changeUsername}
+            placeholder="Search for players"
+          />
+        </Container>
+      ) : (
+        <EmptyDiv></EmptyDiv>
+      )}
+    </>
   );
 };
 
