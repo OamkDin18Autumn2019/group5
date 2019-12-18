@@ -3,6 +3,29 @@ const authServices = require('../src/auth/authServices');
 const seed = async knex => {
   await knex('player').del();
 
+  const mainUsers = [
+    {
+      username: 'root',
+      email: 'root@lmao.lol',
+      password: '111111'
+    },
+    {
+      username: 'diego',
+      email: 'diego@lmao.lol',
+      password: '111111'
+    },
+    {
+      username: 'eetu',
+      email: 'eetu@lmao.lol',
+      password: '111111'
+    },
+    {
+      username: 'riku',
+      email: 'riku@lmao.lol',
+      password: '111111'
+    }
+  ];
+
   const registerTasks = [...Array(100).keys()].map(number => {
     return authServices.registerUser(knex, {
       username: `player${number}`,
@@ -13,11 +36,7 @@ const seed = async knex => {
 
   await knex.transaction(async trx => {
     await Promise.all([
-      authServices.registerUser(trx, {
-        username: 'root',
-        email: 'root@lmao.lol',
-        password: '111111'
-      }),
+      ...mainUsers.map(user => authServices.registerUser(trx, user)),
       ...registerTasks
     ]);
   });
