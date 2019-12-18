@@ -32,9 +32,6 @@ class AppStore {
     this.accessToken = accessToken;
     localStorage.setItem('accessToken', accessToken);
   }
-  @action setGameIdCs() {
-    this.gameId = 1;
-  }
 
   get authenticated() {
     return !!this.accessToken;
