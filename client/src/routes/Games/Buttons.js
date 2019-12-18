@@ -32,6 +32,17 @@ const StyledText = styled.p`
   margin-left: 1%;
   margin-right: 1%;
   margin-top: 1%;
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+  }
+  &:active {
+    opacity: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+  }
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;

@@ -24,6 +24,10 @@ const MainTitle = styled.h1`
   color: #fff;
   display: inline-block !important;
   align-items: center;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+  }
   @media (max-width: 700px) {
     display: block;
     width: 250px;
@@ -96,6 +100,10 @@ const Table = styled.div`
   padding-left: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  &:hover {
+    opacity: 0.5;
+    transition: 0.1s ease;
+  }
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
