@@ -32,6 +32,14 @@ const Buttons = props => {
     margin-left: 1%;
     margin-right: 1%;
     margin-top: 1%;
+    @media (max-width: 700px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 150px;
+      height: auto;
+      align-items: center;
+    }
   `;
 
   const Styled = styled.div`
@@ -40,6 +48,15 @@ const Buttons = props => {
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
+    @media (max-width: 700px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
   `;
 
   const StyledLink = styled(Link)`

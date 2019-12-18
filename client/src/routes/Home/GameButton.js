@@ -8,6 +8,12 @@ const Logo = styled.img`
   width: 400px;
   height: 180px;
   vertical-align: middle;
+  @media (max-width: 700px) {
+    display: block;
+    width: 190px;
+    height: 75px;
+    align-items: center;
+  }
 `;
 
 const Title = styled.span``;

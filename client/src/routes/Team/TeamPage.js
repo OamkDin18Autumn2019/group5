@@ -35,6 +35,13 @@ const Title = styled.h1`
   color: #fff;
   text-align: left;
   margin-bottom: 40px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-bottom: 10px;
+    font-size 24px;
+  }
 `;
 
 const SubTitle = styled.h1`
@@ -45,12 +52,24 @@ const SubTitle = styled.h1`
   font-size: 20px;
   text-align: center;
   color: #fff;
+  @media (max-width: 700px) {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size 18px;
+  }
 `;
 
 const Tbody = styled.tbody`
   background: #32353d;
-
   padding: 40px;
+  @media (max-width: 700px) {
+    display: flex;
+    font-size: 14px;
+    flex-direction: column;
+    align-items: left;
+    padding: 15px;
+    width: 80%;
+  }
 `;
 
 const Container = styled.div`
@@ -67,6 +86,8 @@ const MemberData = styled.div`
   height: 15px;
   border-bottom: 1px solid;
   padding: 10px;
+  @media (max-width: 700px) {
+  }
 `;
 
 const TeamPage = props => {

@@ -13,6 +13,10 @@ const StyledNavBar = styled.div`
   flex-wrap: wrap;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  @media (max-width: 700px) {
+    display: block;
+    align-items: center;
+  }
 `;
 
 const Title = styled.h1`
@@ -23,6 +27,11 @@ const Title = styled.h1`
   color: #fff;
   display: inline-block !important;
   align-items: center;
+  @media (max-width: 700px) {
+    display: block;
+    width: 250px;
+    align-items: center;
+  }
 `;
 
 export const NavBarLink = styled(Link)`
@@ -54,6 +63,11 @@ export const NavBarLink = styled(Link)`
     opacity: 1;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
+  }
+  @media (max-width: 700px) {
+    display: inline-block;
+    width: 190px;
+    align-items: center;
   }
 `;
 

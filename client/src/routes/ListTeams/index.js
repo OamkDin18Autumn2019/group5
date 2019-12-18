@@ -36,6 +36,13 @@ const Title = styled.h1`
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
   margin-top: 20px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size 24px;
+  }
 `;
 
 const Container = styled.div`
@@ -52,6 +59,14 @@ const Tbody = styled.div`
   background: #32353d;
   margin-top: 10px;
   padding: 40px;
+  @media (max-width: 700px) {
+    display: flex;
+    font-size: 14px;
+    flex-direction: column;
+    align-items: left;
+    padding: 15px;
+    width: 80%;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -76,6 +91,11 @@ const Table = styled.div`
   padding-left: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 const TeamData = styled.div`
@@ -85,6 +105,8 @@ const TeamData = styled.div`
   padding: 10px;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  @media (max-width: 700px) {
+  }
 `;
 
 const ListTeams = props => {
