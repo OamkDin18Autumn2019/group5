@@ -16,6 +16,7 @@ const StyledAlert = styled.div`
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: left;
     margin-bottom: 10px;
     width: 290px;
