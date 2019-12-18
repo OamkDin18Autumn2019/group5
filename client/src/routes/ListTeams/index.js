@@ -13,6 +13,19 @@ const Section = styled.div`
   background-repeat: no-repeat;
   font-family: Roboto, sans-serif;
 `;
+
+const MainTitle = styled.h1`
+margin: 0;
+font-weight: 300;
+font-size: 28px;
+color: #fff;
+cursor: pointer;
+text-align: center;
+padding 20px;
+text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+  1px 1px 0 #000;
+`;
+
 const Title = styled.h1`
   margin: 0;
   font-weight: 300;
@@ -37,7 +50,7 @@ const BlockDiv = styled.div`
 const Tbody = styled.div`
   width: 30%;
   background: #32353d;
-  margin-top: 40px;
+  margin-top: 10px;
   padding: 40px;
 `;
 
@@ -91,6 +104,13 @@ const ListTeams = props => {
 
   return (
     <Section>
+      <MainTitle
+        onClick={() => {
+          props.history.push('/');
+        }}
+      >
+        Global E-sports
+      </MainTitle>
       <Container>
         <Tbody>
           <Title>

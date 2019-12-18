@@ -16,6 +16,18 @@ const Background = styled.div`
   font-family: Roboto, sans-serif;
 `;
 
+const MainTitle = styled.h1`
+margin: 0;
+font-weight: 300;
+font-size: 28px;
+color: #fff;
+cursor: pointer;
+text-align: center;
+padding 20px;
+text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+  1px 1px 0 #000;
+`;
+
 const Title = styled.h1`
   margin: 10px 0 20px 0;
   font-weight: 300;
@@ -45,7 +57,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 1%;
   font-family: Roboto, sans-serif;
   font-size: 16px;
 `;
@@ -74,6 +86,13 @@ const TeamPage = props => {
   return (
     teamStore.selectedTeam && (
       <Background>
+        <MainTitle
+          onClick={() => {
+            props.history.push('/');
+          }}
+        >
+          Global E-sports
+        </MainTitle>
         <Container>
           <Tbody>
             <Title>{teamStore.selectedTeam.name}</Title>
