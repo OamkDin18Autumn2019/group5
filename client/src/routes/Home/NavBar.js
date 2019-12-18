@@ -77,14 +77,53 @@ export const NavBarLink = styled(Link)`
   }
 `;
 
+const Profile = styled.div`
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: #fff;
+  margin-left: 9px;
+`;
+
+const ProfileLogo = styled.img`
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+`;
+
+const StyledLink = styled(Link)`
+  width: 100%;
+  text-decoration: none;
+  align-content: center;
+  align-items: center;
+  align-text: center;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+  }
+`;
+
 const NavBar = props => {
-  const { appStore, authStore } = props.rootStore;
+  const { appStore, authStore, profileStore } = props.rootStore;
 
   return (
     <>
       {appStore.accessToken ? (
         <StyledNavBar>
           <Title>Global E-sports</Title>
+          <StyledLink
+            to="/profile-page"
+            onClick={() => profileStore.GetProfileData()}
+          >
+            <Profile>
+              {profileStore.profile && profileStore.profile.username}{' '}
+              <ProfileLogo
+                src={
+                  'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
+                }
+              />{' '}
+            </Profile>
+          </StyledLink>
           <NavBarLink to="/create-team">Create Team</NavBarLink>
           <NavBarLink onClick={() => authStore.logout()}>Logout</NavBarLink>
         </StyledNavBar>
