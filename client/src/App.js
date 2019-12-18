@@ -44,10 +44,10 @@ const App = observer(props => {
   }, [appStore.initialized, profileStore.invitations, appStore.accessToken]);
 
   return (
-    <StyledHome>
-      <Section>
-        <NavBar />
-        <BrowserRouter>
+    <BrowserRouter>
+      <StyledHome>
+        <Section>
+          <NavBar {...props} />
           {alertStore.isOpen && <Alert rootStore={props.rootStore} />}
           <Switch>
             <Route exact path="/" component={Home} />
@@ -79,9 +79,9 @@ const App = observer(props => {
               <Route path={`/${game.name}/teams/:id`} component={TeamPage} />
             ))}
           </Switch>
-        </BrowserRouter>
-      </Section>
-    </StyledHome>
+        </Section>
+      </StyledHome>
+    </BrowserRouter>
   );
 });
 

@@ -54,20 +54,11 @@ const Games = props => {
     <>
       {gamesStore.selectedGame && appStore.authenticated ? (
         <Section>
-          <MainTitle
-            onClick={() => {
-              props.history.push('/');
-            }}
-          >
-            Global E-sports
-          </MainTitle>
-          <GameNavBar />
           <Buttons />
           <FeaturedTournaments />
         </Section>
       ) : (
         <Section>
-          <GameNavBar />
           <FeaturedTournaments />
         </Section>
       )}
