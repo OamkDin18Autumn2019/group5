@@ -125,34 +125,41 @@ const ListTeams = props => {
   }, [appStore.initialized]);
 
   return (
-    <Section>
-      <MainTitle
-        onClick={() => {
-          props.history.push('/');
-        }}
-      >
-        Global E-sports
-      </MainTitle>
-      <Container>
-        <Tbody>
-          <Title>
-            Teams for {gamesStore.selectedGame && gamesStore.selectedGame.name}
-          </Title>
-          {teamStore.teams.map(team => (
-            <StyledLink
-              to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}
-            >
-              <BlockDiv>
-                <Table>{team.name}</Table>
-                <TeamData>
-                  Recruiting: {team.recruiting ? 'Yes' : 'No'}
-                </TeamData>
-              </BlockDiv>
-            </StyledLink>
-          ))}
-        </Tbody>
-      </Container>
-    </Section>
+    <>
+      {gamesStore.selectedGame && gamesStore.selectedGame.name ? (
+        <Section>
+          <MainTitle
+            onClick={() => {
+              props.history.push('/');
+            }}
+          >
+            Global E-sports
+          </MainTitle>
+          <Container>
+            <Tbody>
+              <Title>
+                Teams for{' '}
+                {gamesStore.selectedGame && gamesStore.selectedGame.name}
+              </Title>
+              {teamStore.teams.map(team => (
+                <StyledLink
+                  to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}
+                >
+                  <BlockDiv>
+                    <Table>{team.name}</Table>
+                    <TeamData>
+                      Recruiting: {team.recruiting ? 'Yes' : 'No'}
+                    </TeamData>
+                  </BlockDiv>
+                </StyledLink>
+              ))}
+            </Tbody>
+          </Container>
+        </Section>
+      ) : (
+        ''
+      )}
+    </>
   );
 };
 
