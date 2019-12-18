@@ -32,7 +32,7 @@ const MainTitle = styled.h1`
   }
   @media (max-width: 700px) {
     display: block;
-    width: 250px;
+    width: 100%;
     align-items: center;
   }
 `;

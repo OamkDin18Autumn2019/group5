@@ -22,7 +22,6 @@ const Logo = styled.img`
   width: 70px;
   height: 70px;
   vertical-align: middle;
-  margin-left: 50px;
 `;
 
 const Profile = styled.div`
@@ -45,6 +44,10 @@ const StyledLink = styled(Link)`
   align-content: center;
   align-items: center;
   align-text: center;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+  }
 `;
 
 const NavBar = props => {
@@ -54,9 +57,9 @@ const NavBar = props => {
     <>
       {gamesStore.selectedGame && gamesStore.selectedGame.name ? (
         <StyledNavBar>
-          <Link to={gamesStore.selectedGame.name}>
+          <StyledLink to={gamesStore.selectedGame.name}>
             <Logo src={gamesStore.selectedGame.logo} />
-          </Link>
+          </StyledLink>
           <StyledLink to="/profile-page">
             <Profile>
               Profile{' '}
