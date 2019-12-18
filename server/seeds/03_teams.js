@@ -24,9 +24,9 @@ const seed = async knex => {
   });
 
   await knex.transaction(async trx => {
-    await Promise.all([
-      ...mainTeams.map(mainTeam => teamServices.registerTeam(trx, mainTeam))
-    ]);
+    await Promise.all(
+      mainTeams.map(mainTeam => teamServices.registerTeam(trx, mainTeam))
+    );
   });
 };
 
