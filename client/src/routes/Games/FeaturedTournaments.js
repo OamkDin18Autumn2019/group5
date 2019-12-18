@@ -39,7 +39,7 @@ const Title = styled.h1`
 const Tbody = styled.div`
   background: #32353d;
   padding: 40px;
-  width: 50%;
+  width: 35%;
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
@@ -75,16 +75,16 @@ const FeaturedTournaments = props => {
           <Title>Featured Tournaments</Title>
         </TableRow>
         <TableRow>
-          <TableData>Starts in</TableData>
+          <TableData>Starts in: 1d 3h</TableData>
           <TableData>testiturnaus</TableData>
           <TableData>Peli</TableData>
-          <TableData>0/64</TableData>
+          <TableData>32/64</TableData>
         </TableRow>
         <TableRow>
-          <TableData>Starts in</TableData>
+          <TableData>Starts in: 7d 1h</TableData>
           <TableData>testiturnaus</TableData>
           <TableData>Peli</TableData>
-          <TableData>0/64</TableData>
+          <TableData>16/64</TableData>
         </TableRow>
       </Tbody>
     </Table>

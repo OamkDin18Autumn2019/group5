@@ -21,6 +21,8 @@ const StyledNavBar = styled.div`
 
 const Title = styled.h1`
   width: 100%;
+  heigth: 37px;
+  cursor: pointer;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
     2px 2px 0 #000;
   text-align: center;

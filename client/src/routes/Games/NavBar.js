@@ -59,7 +59,7 @@ const NavBar = props => {
           </Link>
           <StyledLink to="/profile-page">
             <Profile>
-              JyrGi{' '}
+              Profile{' '}
               <ProfileLogo
                 src={
                   'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
