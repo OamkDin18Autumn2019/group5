@@ -22,7 +22,9 @@ const seed = async knex => {
     LIMIT 4
   `);
 
-  const teams = await knex('team').column('id');
+  const teams = await knex('team')
+    .column('id')
+    .whereNot('id', mainTeam[0].id);
 
   const mainRosterTasks = mainUsers.map(user => knex =>
     insertTeamRoster(knex, { playerId: user.id, teamId: mainTeam[0].id })
