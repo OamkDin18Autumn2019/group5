@@ -14,6 +14,24 @@ const Section = styled.div`
   background-position: top center;
   background-repeat: no-repeat;
   overflow: hidden;
+  font-family: Robot, Sans-serif;
+`;
+
+const MainTitle = styled.h1`
+  width: 100%;
+  heigth: 37px;
+  cursor: pointer;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
+  text-align: center;
+  color: #fff;
+  display: inline-block !important;
+  align-items: center;
+  @media (max-width: 700px) {
+    display: block;
+    width: 250px;
+    align-items: center;
+  }
 `;
 
 const Games = props => {
@@ -32,6 +50,13 @@ const Games = props => {
     <>
       {gamesStore.selectedGame && appStore.authenticated ? (
         <Section>
+          <MainTitle
+            onClick={() => {
+              props.history.push('/');
+            }}
+          >
+            Global E-sports
+          </MainTitle>
           <NavBar />
           <Buttons />
           <FeaturedTournaments />
