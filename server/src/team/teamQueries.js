@@ -14,6 +14,13 @@ const getTeamsByGame = (knex, gameId) => knex.from('team').where({ gameId });
 
 const getTeamsByPlayerId = (knex, playerId) => {
   return knex
+    .column({
+      id: 'team.id',
+      name: 'team.name',
+      gameId: 'team.gameId',
+      captainId: 'team.captainId',
+      recruiting: 'team.recruiting'
+    })
     .from('team')
     .leftJoin('team_roster', 'team_roster.teamId', 'team.id')
     .where('team_roster.playerId', playerId);
