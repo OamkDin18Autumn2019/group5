@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import NavBar from './NavBar';
+import GameNavBar from './GameNavBar';
 import Buttons from './Buttons';
 import FeaturedTournaments from './FeaturedTournaments';
 
@@ -61,13 +61,13 @@ const Games = props => {
           >
             Global E-sports
           </MainTitle>
-          <NavBar />
+          <GameNavBar />
           <Buttons />
           <FeaturedTournaments />
         </Section>
       ) : (
         <Section>
-          <NavBar />
+          <GameNavBar />
           <FeaturedTournaments />
         </Section>
       )}
