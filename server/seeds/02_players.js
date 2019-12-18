@@ -1,8 +1,6 @@
 const authServices = require('../src/auth/authServices');
 
 const seed = async knex => {
-  await knex('player').del();
-
   const mainUsers = [
     {
       username: 'root',
