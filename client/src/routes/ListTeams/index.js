@@ -37,6 +37,7 @@ const BlockDiv = styled.div`
 const Tbody = styled.div`
   width: 30%;
   background: #32353d;
+  margin-top: 40px;
   padding: 40px;
 `;
 
@@ -92,7 +93,9 @@ const ListTeams = props => {
     <Section>
       <Container>
         <Tbody>
-          <Title>Teams for CSGO</Title>
+          <Title>
+            Teams for {gamesStore.selectedGame && gamesStore.selectedGame.name}
+          </Title>
           {teamStore.teams.map(team => (
             <StyledLink
               to={`/${gamesStore.selectedGame.name}/teams/${team.id}`}
