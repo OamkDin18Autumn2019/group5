@@ -13,6 +13,14 @@ const StyledAlert = styled.div`
   text-align: center;
   padding: 5px;
   background-color: ${({ color }) => color};
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-bottom: 10px;
+    width: 290px;
+    font-size 24px;
+  }
 `;
 
 const AlertText = styled.div`
@@ -26,6 +34,13 @@ const CloseButton = styled.button`
   padding: 0.05em 0.75em;
   border: 1px solid black;
   border-radius: 3px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-bottom: 10px;
+    font-size 24px;
+  }
 `;
 
 const Message = styled.p`
