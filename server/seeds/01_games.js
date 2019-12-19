@@ -1,6 +1,4 @@
 const seed = async knex => {
-  await knex('game').del();
-
   const games = [
     {
       id: 1,
