@@ -2,26 +2,40 @@ const Team = require('./Team');
 const Player = require('../players/Player');
 const teamQueries = require('./teamQueries');
 
-const getTeams = async (knex, { gameId }) => {
-  const teamsData = await teamQueries.getTeamsByGame(knex, gameId);
+const getTeams = async (knex, { playerId, gameId }) => {
+  const teamsData = playerId
+    ? await teamQueries.getTeamsByPlayerId(knex, playerId)
+    : await teamQueries.getTeamsByGame(knex, gameId);
 
-  const teams = teamsData.map(teamData => new Team(teamData));
+  const teams = teamsData.map(teamData => {
+    const userIsCaptain = teamData.captainId === playerId;
+
+    return new Team({ ...teamData, canInvitePlayers: userIsCaptain });
+  });
 
   return teams;
 };
 
-const getTeam = async (knex, { id }) => {
+const getTeam = async (knex, { id }, userId) => {
   const teamData = await teamQueries.getTeamById(knex, id);
 
   if (!teamData) {
     throw new Error('Team does not exist');
   }
 
-  const playersData = await teamQueries.getTeamRoster(knex, { teamId: id });
+  const userIsCaptain = teamData.captainId === userId;
+
+  const playersData = (await teamQueries.getTeamRoster(knex, {
+    teamId: id
+  }))[0];
 
   const players = playersData.map(playerData => new Player(playerData));
 
-  const team = new Team({ ...teamData, players });
+  const team = new Team({
+    ...teamData,
+    canInvitePlayers: userIsCaptain,
+    players
+  });
 
   return team;
 };

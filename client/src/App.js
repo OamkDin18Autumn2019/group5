@@ -9,13 +9,17 @@ import ListTeams from './routes/ListTeams';
 import Games from './routes/Games';
 import TeamPage from './routes/Team/TeamPage';
 import { BrowserRouter } from 'react-router-dom';
+import Profile from './routes/Profile';
 
 const App = observer(props => {
-  const { alertStore, appStore, gamesStore } = props.rootStore;
+  const { alertStore, appStore, gamesStore, profileStore } = props.rootStore;
 
   useEffect(() => {
     if (!appStore.initialized) appStore.init();
-  }, [appStore.initialized]);
+    if (appStore.accessToken && !profileStore.initialized) {
+      profileStore.getProfileData();
+    }
+  }, [appStore.initialized, profileStore.invitations, appStore.accessToken]);
 
   return (
     <BrowserRouter>
@@ -39,6 +43,7 @@ const App = observer(props => {
           path="/dota-2"
           render={props => <Games {...props} game={'dota-2'} />}
         />
+        <Route exact path="/profile-page" component={Profile} />
         <Route exact path="/register" component={Auth} />
         <Route exact path="/login" component={Auth} />
         <Route exact path="/create-team" component={Team} />

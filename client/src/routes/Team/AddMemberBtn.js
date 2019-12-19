@@ -2,6 +2,64 @@ import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  width: 650px;
+  font-family: 'Roboto', sans-serif;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 410px;
+    height: auto;
+    align-items: center;
+  }
+`;
+
+const EmptyDiv = styled.div`
+  margin-left: 650px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 130px;
+    margin-left: 110px;
+    height: auto;
+    align-items: center;
+  }
+`;
+
+const Input = styled.input`
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 150px;
+  height: 26px;
+  border: none;
+  border-bottom: 1px solid #20242e;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-left: 500px;
+  transition: 0.2s ease;
+  &:focus {
+    border-bottom: 2px solid #636363;
+    color: #20242e;
+    transition: 0.2s ease;
+    outline: none;
+  }
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 130px;
+    margin-left: 110px;
+    font-size: 14px;
+    height: auto;
+    align-items: center;
+  }
+`;
+
 const AddButton = styled.button`
   text-decoration: none;
   width: 150px;
@@ -32,10 +90,52 @@ const AddButton = styled.button`
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
   }
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 14px;
+    width: 130px;
+    margin-left: 110px;
+    height: 25px;
+    align-items: center;
+  }
 `;
 
 const AddMemberBtn = props => {
-  return <AddButton>+ Add Member</AddButton>;
+  const { teamStore } = props.rootStore;
+
+  const [username, setUsername] = useState('');
+
+  const [teamId, setTeamId] = useState(teamStore.selectedTeamId);
+
+  const changeUsername = e => {
+    setUsername(e.target.value);
+  };
+
+  const invitePlayer = async () => {
+    await teamStore.invitePlayer(username, teamId);
+    setUsername('');
+    setTeamId(teamStore.selectedTeamId);
+  };
+
+  return (
+    <>
+      {teamStore.selectedTeam.canInvitePlayers ? (
+        <Container>
+          <AddButton onClick={invitePlayer}>+ Add Member</AddButton>
+          <Input
+            type="text"
+            value={username}
+            onChange={changeUsername}
+            placeholder="Search for players"
+          />
+        </Container>
+      ) : (
+        <EmptyDiv></EmptyDiv>
+      )}
+    </>
+  );
 };
 
 export default inject('rootStore')(observer(AddMemberBtn));

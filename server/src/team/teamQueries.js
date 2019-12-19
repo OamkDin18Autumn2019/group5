@@ -12,25 +12,57 @@ const getTeamByName = (knex, { name, gameId }) =>
 
 const getTeamsByGame = (knex, gameId) => knex.from('team').where({ gameId });
 
+const getTeamsByPlayerId = (knex, playerId) => {
+  return knex
+    .column({
+      id: 'team.id',
+      name: 'team.name',
+      gameId: 'team.gameId',
+      captainId: 'team.captainId',
+      recruiting: 'team.recruiting'
+    })
+    .from('team')
+    .leftJoin('team_roster', 'team_roster.teamId', 'team.id')
+    .where('team_roster.playerId', playerId);
+};
+
 const insertTeam = (knex, { name, gameId, captainId }) =>
   knex.insert({ name, gameId, captainId }).into('team');
 
 const getTeamRoster = (knex, { teamId, playerId }) => {
-  const subQuery = knex
-    .column('playerId')
-    .select()
-    .from('team_roster')
-    .where({ teamId });
+  const query = knex.raw(
+    `
+    SELECT
+      player.id,
+      player.username,
+      player.email
+    FROM player
+    LEFT JOIN team_roster
+      ON team_roster.playerId = player.id
+    ${
+      playerId
+        ? 'WHERE team_roster.playerId = :playerId AND team_roster.teamId = :teamId;'
+        : 'WHERE team_roster.teamId = :teamId;'
+    }
+      
+  `,
+    { playerId, teamId }
+  );
+  // const subQuery = knex
+  //   .column('playerId')
+  //   .select()
+  //   .from('team_roster')
+  //   .where({ teamId });
 
-  if (playerId) {
-    subQuery.where({ playerId }).first();
-  }
+  // if (playerId) {
+  //   subQuery.where({ playerId }).first();
+  // }
 
-  const query = knex
-    .column(['id', 'username', 'email'])
-    .select()
-    .from('player')
-    .whereIn('id', subQuery);
+  // const query = knex
+  //   .column(['id', 'username', 'email'])
+  //   .select()
+  //   .from('player')
+  //   .whereIn('id', subQuery);
 
   return query;
 };
@@ -44,6 +76,7 @@ const insertTeamRoster = (knex, { playerId, teamId }) =>
 module.exports = {
   getTeamById,
   getTeamByName,
+  getTeamsByPlayerId,
   getTeamsByGame,
   insertTeam,
   getTeamRoster,

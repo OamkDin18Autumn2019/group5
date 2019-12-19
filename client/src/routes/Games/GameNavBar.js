@@ -22,7 +22,6 @@ const Logo = styled.img`
   width: 70px;
   height: 70px;
   vertical-align: middle;
-  margin-left: 50px;
 `;
 
 const Profile = styled.div`
@@ -45,28 +44,38 @@ const StyledLink = styled(Link)`
   align-content: center;
   align-items: center;
   align-text: center;
+  &:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+  }
 `;
 
-const NavBar = props => {
-  const { appStore, gamesStore } = props.rootStore;
+const GameNavBar = props => {
+  const { appStore, gamesStore, profileStore } = props.rootStore;
 
   return (
-    <StyledNavBar>
-      <Link to={gamesStore.selectedGame.name}>
-        <Logo src={gamesStore.selectedGame.logo} />
-      </Link>
-      <StyledLink to="/profile-page">
-        <Profile>
-          JyrGi{' '}
-          <ProfileLogo
-            src={
-              'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
-            }
-          />{' '}
-        </Profile>
-      </StyledLink>
-    </StyledNavBar>
+    <>
+      {gamesStore.selectedGame && gamesStore.selectedGame.name ? (
+        <StyledNavBar>
+          <StyledLink to={gamesStore.selectedGame.name}>
+            <Logo src={gamesStore.selectedGame.logo} />
+          </StyledLink>
+          <StyledLink to="/profile-page">
+            <Profile>
+              {profileStore.profile && profileStore.profile.username}{' '}
+              <ProfileLogo
+                src={
+                  'https://icon-library.net/images/profile-icon-white/profile-icon-white-3.jpg'
+                }
+              />{' '}
+            </Profile>
+          </StyledLink>
+        </StyledNavBar>
+      ) : (
+        ''
+      )}
+    </>
   );
 };
 
-export default inject('rootStore')(observer(NavBar));
+export default inject('rootStore')(observer(GameNavBar));

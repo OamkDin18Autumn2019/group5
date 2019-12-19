@@ -3,14 +3,29 @@ const getInvitationById = (knex, id) =>
     .where({ id })
     .first();
 
-const getInvitationByPlayerAndTeam = (knex, { playerId, teamId, state }) => {
-  const query = knex('request').where({ playerId, teamId });
+const getInvitationsByPlayerAndTeam = (knex, { playerId, teamId, state }) => {
+  const query = knex('request')
+    .column(
+      'request.id',
+      'request.state',
+      { gameId: 'game.id' },
+      { gameName: 'game.name' },
+      { teamId: 'team.id' },
+      { teamName: 'team.name' },
+      { captainName: 'player.username' }
+    )
+    .leftJoin('team', 'request.teamId', 'team.id')
+    .leftJoin('game', 'game.id', 'team.gameId')
+    .leftJoin('player', 'team.captainId', 'player.id')
+    .where({ playerId });
+
+  if (teamId) {
+    query.where({ teamId });
+  }
 
   if (state) {
     query.where({ state });
   }
-
-  query.first();
 
   return query;
 };
@@ -25,7 +40,7 @@ const updateInvitationState = (knex, { id, state }) =>
 
 module.exports = {
   getInvitationById,
-  getInvitationByPlayerAndTeam,
+  getInvitationsByPlayerAndTeam,
   insertInvitation,
   updateInvitationState
 };

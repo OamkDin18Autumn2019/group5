@@ -6,6 +6,11 @@ import styled from 'styled-components';
 const StyledGameList = styled.div`
   text-align: center;
   outline: black 1px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const GameList = props => {

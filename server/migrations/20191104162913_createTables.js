@@ -16,6 +16,10 @@ const up = knex => {
     .createTable('game', table => {
       table.increments('id').primary();
       table
+        .string('slug', 50)
+        .notNullable()
+        .unique();
+      table
         .string('name', 50)
         .notNullable()
         .unique();
