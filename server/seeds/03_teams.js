@@ -1,5 +1,6 @@
 const authServices = require('../src/auth/authServices');
 const teamServices = require('../src/team/teamServices');
+const fetch = require('node-fetch');
 
 const seed = async knex => {
   const rootUser = await authServices.authenticateFromCredentials(knex, {
@@ -15,9 +16,17 @@ const seed = async knex => {
     }
   ];
 
-  const registerTasks = [...Array(20).keys()].map(number => {
+  const key = await (await fetch(
+    'https://random-word-api.herokuapp.com/key?'
+  )).text();
+
+  const words = await (await fetch(
+    `http://random-word-api.herokuapp.com/word?key=${key}&number=20`
+  )).json();
+
+  const registerTasks = words.map(word => {
     return teamServices.registerTeam(knex, {
-      name: `Team ${number}`,
+      name: `Team ${word}`,
       captainId: rootUser.id,
       gameId: Math.floor(Math.random() * 3 + 1)
     });
