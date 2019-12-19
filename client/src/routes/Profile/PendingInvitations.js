@@ -22,6 +22,7 @@ const PendingInvitations = props => {
       1px 1px 0 #000;
     padding: 0;
     margin: 0;
+    font-family: Robot, Sans-serif;
     margin-top: 0px;
     margin-left: 15px;
     margin-bottom: 0;
@@ -39,11 +40,17 @@ const PendingInvitations = props => {
     @media (max-width: 700px) {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      width: 130px;
-      margin-left: 110px;
+      width: 80px;
       height: 25px;
       align-items: center;
+    }
+  `;
+
+  const TD = styled.td`
+    @media (max-width: 700px) {
+      width: 100px;
+      margin-left: 0px;
+      height: 25px;
     }
   `;
 
@@ -60,12 +67,28 @@ const PendingInvitations = props => {
     margin-bottom: 0;
   `;
 
+  const SubTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 15px 0;
+  font-weight: 200;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  @media (max-width: 700px) {
+    text-align: left;
+    margin-bottom: 10px;
+    width: 100px;
+    display: flex;
+    justify-content: flex-start;
+    font-size 18px;
+  }
+`;
+
   return (
-    <div>
+    <>
       <Table>
-        <tr>
-          <th>Team invitations</th>
-        </tr>
+        <SubTitle>Team invitations</SubTitle>
         {profileStore.pendingInvitations.map(invitation => (
           <tr>
             <StyledLink
@@ -74,9 +97,9 @@ const PendingInvitations = props => {
                   .name
               }/teams/${invitation.team.id}`}
             >
-              <td>{invitation.team.name}</td>
+              <TD>{invitation.team.name}</TD>
             </StyledLink>
-            <td>
+            <TD>
               <AcceptButton
                 onClick={() =>
                   profileStore.acceptInvite(invitation.id, 'accepted')
@@ -85,8 +108,8 @@ const PendingInvitations = props => {
               >
                 Accept
               </AcceptButton>
-            </td>
-            <td>
+            </TD>
+            <TD>
               <AcceptButton
                 onClick={() =>
                   profileStore.acceptInvite(invitation.id, 'refused')
@@ -95,11 +118,11 @@ const PendingInvitations = props => {
               >
                 Reject
               </AcceptButton>
-            </td>
+            </TD>
           </tr>
         ))}
       </Table>
-    </div>
+    </>
   );
 };
 
