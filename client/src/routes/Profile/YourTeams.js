@@ -46,6 +46,7 @@ const TeamData = styled.div`
     transition: 0.1s ease;
   }
   @media (max-width: 700px) {
+    width: 90%;
   }
 `;
 
@@ -59,6 +60,8 @@ const SubTitle = styled.h1`
   color: #fff;
   @media (max-width: 700px) {
     text-align: left;
+    display: flex;
+    justify-content: flex-start;
     margin-bottom: 10px;
     font-size 18px;
   }
