@@ -8,7 +8,7 @@ import PendingInvitations from './PendingInvitations';
 const Section = styled.div`
   width: 100%;
   height: 100%;
-  // position: absolute;
+  position: absolute;
   background: #20242e;
   background-size: cover;
   background-position: top center;

@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const Section = styled.div`
   width: 100%;
-  // height: 100%;
+  height: 100%;
   background: #20242e;
-  position: sticky;
+  position: absolute;
   background-size: cover;
   background-position: top center;
   background-repeat: repeat;
